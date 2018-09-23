@@ -1,0 +1,2 @@
+class SpeicesGroup < ApplicationRecord
+end
