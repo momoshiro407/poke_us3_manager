@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
-  get 'user/index'
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  resources :top_page
+  # get 'user/index'
+  # resources :top_page
+  root 'static_pages#home'
+  get 'static_pages/home'
+  get 'static_pages/help'
+  get 'static_pages/about'
+
   resources :users
   resources :species_groups
 end
