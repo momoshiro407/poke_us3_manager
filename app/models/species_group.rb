@@ -1,0 +1,2 @@
+class SpeciesGroup < ApplicationRecord
+end
