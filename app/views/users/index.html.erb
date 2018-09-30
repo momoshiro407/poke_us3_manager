@@ -1,0 +1,10 @@
+<% provide(:title, 'Users') %>
+<h1>種族統一所持ユーザー一覧</h1>
+
+<%= will_paginate %>
+
+<ul class="users">
+  <%= render @users %>
+</ul>
+
+<%= will_paginate %>
