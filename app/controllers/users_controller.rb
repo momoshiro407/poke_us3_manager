@@ -23,6 +23,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @species_groups = @user.species_groups.paginate(page: params[:page])
   end
 
   def edit
