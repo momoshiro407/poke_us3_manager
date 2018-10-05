@@ -7,11 +7,11 @@
     <li>ログアウト</li>
   </ul>
 </div>
-<div>
+<div class="col-md-8">
   <p>所持している種族統一パーティ一覧</p>
-  <ul>
-    <li>ロズレイド</li>
-    <li>ユキメノコ</li>
-    <li>アブソル</li>
-  </ul>
+  <% if @user.species_groups.any? %>
+    <ul class="species_groups">
+      <%= render @species_groups %>
+    </ul>
+  <% end %>
 </div>

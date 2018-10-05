@@ -1,0 +1,10 @@
+<li id="species_group-<%= species_group.id %>">
+  <span class="species_group"><%= link_to species_group.species_name, species_group %></span>
+  <% if current_user?(species_group.user) %>
+    | <%= link_to 'delete', species_group, method: :delete, data: {confirm: '削除して宜しいですか？'} %>
+  <% end %>
+  <br>
+  <span class="number_of_trained">育成数：50</span>
+  <br>
+  <span class="number_of_untrained">育成予定数：0</span>
+</li>
