@@ -1,11 +1,8 @@
 <h1><%= @user.name %>さんのページ</h1>
 <div>
-  <p>メニュー</p>
-  <ul>
-    <li>パーティの追加</li>
-    <li>プロフィール編集</li>
-    <li>ログアウト</li>
-  </ul>
+  <p>
+    <%= link_to '新しい種族グループを作成', new_species_group_path %>
+  </p>
 </div>
 <div class="col-md-8">
   <p>所持している種族統一パーティ一覧</p>
