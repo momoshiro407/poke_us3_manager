@@ -1,5 +1,3 @@
 <%= render 'shared/error_messages', object: f.object %>
 <%= f.label :species_number %>
-<%= f.text_field :species_number, class: 'form-control' %>
-<%= f.label :species_name %>
-<%= f.text_field :species_name, class: 'form-control' %>
+<%= f.collection_select :species_number, Species.all.order(:name), :number, :name, include_blank: true %>
