@@ -9,4 +9,5 @@ Rails.application.routes.draw do
 
   resources :users
   resources :species_groups
+  resources :monsters
 end

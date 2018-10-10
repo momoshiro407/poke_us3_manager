@@ -127,6 +127,10 @@ input {
   height: auto !important;
 }
 
+select {
+  height: 30px;
+}
+
 #error_explanation {
   color: red;
   ul {
@@ -190,4 +194,19 @@ input {
 
 .species_groups_description {
   margin-top: 30px;
+}
+
+/* monsters */
+
+.monsters {
+  list-style: none;
+  padding: 0;
+  li {
+    padding: 10px 0;
+    border-top: 1px solid #e8e8e8;
+  }
+  .monster {
+    margin-top: 5em;
+    padding-top: 0;
+  }
 }

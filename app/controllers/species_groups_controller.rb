@@ -1,5 +1,6 @@
 class SpeciesGroupsController < ApplicationController
   before_action :logged_in_user, only: [:new, :create, :destroy]
+  before_action :correct_user_species_group, only: [:show]
 
   def new
     @species_group = SpeciesGroup.new
@@ -7,6 +8,8 @@ class SpeciesGroupsController < ApplicationController
 
   def create
     @species_group = current_user.species_groups.build(species_group_params)
+    # 入力されたspecies_numberと一致するspeciesモデルのnumberを検索し、対応するnameをspecies_nameへ格納
+    @species_group.species_name = Species.find_by(number: params[:species_group][:species_number]).name
     if @species_group.save
       log_in @species_group.user
       flash[:success] = '新規種族グループを作成しました'
@@ -17,8 +20,9 @@ class SpeciesGroupsController < ApplicationController
     end
   end
 
-  def index
-    @species_group = SpeciesGroup.find_by(species_number: 407)
+  def show
+    @species_group = SpeciesGroup.find(params[:id])
+    @monsters = @species_group.monsters.paginate(page: params[:page])
   end
 
   private
@@ -26,4 +30,10 @@ class SpeciesGroupsController < ApplicationController
   def species_group_params
     params.require(:species_group).permit(:species_number, :species_name)
   end
+
+  def correct_user_species_group
+    species_group = SpeciesGroup.find(params[:id])
+    redirect_to(root_url) unless current_user?(species_group.user)
+  end
+
 end

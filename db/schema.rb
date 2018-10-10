@@ -10,7 +10,70 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_01_154136) do
+ActiveRecord::Schema.define(version: 2018_10_09_155059) do
+
+  create_table "base_stats_units", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "species_id"
+    t.integer "form"
+    t.integer "hit_point"
+    t.integer "attack"
+    t.integer "defense"
+    t.integer "special_attack"
+    t.integer "special_defense"
+    t.integer "speed"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["species_id"], name: "index_base_stats_units_on_species_id"
+  end
+
+  create_table "monsters", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "species_group_id"
+    t.string "nickname"
+    t.string "gender"
+    t.integer "level"
+    t.string "avility"
+    t.string "nature"
+    t.string "characteristic"
+    t.string "type1"
+    t.string "type2"
+    t.string "move1"
+    t.string "move2"
+    t.string "move3"
+    t.string "move4"
+    t.string "held_item"
+    t.string "combat_rules"
+    t.boolean "is_colored"
+    t.integer "hp_statistics"
+    t.integer "attack_statistics"
+    t.integer "defense_statistics"
+    t.integer "sp_attack_statistics"
+    t.integer "sp_defense_statistics"
+    t.integer "seed_statistics"
+    t.integer "hp_individual"
+    t.integer "attack_individual"
+    t.integer "defense_individual"
+    t.integer "sp_attack_individual"
+    t.integer "sp_defense_individual"
+    t.integer "seed_individual"
+    t.integer "hp_effort"
+    t.integer "attack_effort"
+    t.integer "defense_effort"
+    t.integer "sp_attack_effort"
+    t.integer "sp_defense_effort"
+    t.integer "seed_effort"
+    t.text "memo"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["species_group_id"], name: "index_monsters_on_species_group_id"
+  end
+
+  create_table "species", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "number", null: false
+    t.string "name", null: false
+    t.boolean "is_form_change", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "species_groups", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id"
@@ -31,5 +94,7 @@ ActiveRecord::Schema.define(version: 2018_10_01_154136) do
     t.boolean "admin", default: false
   end
 
+  add_foreign_key "base_stats_units", "species"
+  add_foreign_key "monsters", "species_groups"
   add_foreign_key "species_groups", "users"
 end
