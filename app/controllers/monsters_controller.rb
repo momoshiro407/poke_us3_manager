@@ -1,5 +1,6 @@
 class MonstersController < ApplicationController
   before_action :logged_in_user, only: [:new, :create]
+  before_action :correct_user_monster, only: [:show]
 
   def new
     @monster = Monster.new
@@ -18,6 +19,10 @@ class MonstersController < ApplicationController
     end
   end
 
+  def show
+    @monster = Monster.find(params[:id])
+  end
+
   private
 
   def monster_params
@@ -29,6 +34,11 @@ class MonstersController < ApplicationController
                                     :sp_defense_individual, :speed_individual, :hp_effort, :attack_effort,
                                     :defense_effort, :sp_attack_effort, :sp_defense_effort, :speed_effort, :memo
     )
+  end
+
+  def correct_user_monster
+    monster = Monster.find(params[:id])
+    redirect_to(root_url) unless current_user?(monster.species_group.user)
   end
 
 end
