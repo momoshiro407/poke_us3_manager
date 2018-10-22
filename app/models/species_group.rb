@@ -4,5 +4,4 @@ class SpeciesGroup < ApplicationRecord
 
   validates :user_id, presence: true
   validates :species_number, :species_name, presence: true
-
 end

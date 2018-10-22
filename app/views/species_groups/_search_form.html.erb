@@ -1,0 +1,19 @@
+<%= form_tag(species_group_path, method: 'get') do %>
+  <%= label_tag :nickname, 'ニックネーム' %>
+  <%= text_field_tag :nickname, params[:nickname] %>
+  <%= label_tag :gender, '性別' %>
+  <%= text_field_tag :gender, params[:gender] %>
+  <%= label_tag :avility, '特性' %>
+  <%= text_field_tag :avility, params[:avility] %>
+  <%= label_tag :nature, '性格' %>
+  <%= text_field_tag :nature, params[:nature] %>
+  <%= label_tag :move1, '1つ目の技' %>
+  <%= text_field_tag :move1, params[:move1] %>
+  <%= label_tag :move2, '2つ目の技' %>
+  <%= text_field_tag :move2, params[:move2] %>
+  <%= label_tag :move3, '3つ目の技' %>
+  <%= text_field_tag :move3, params[:move3] %>
+  <%= label_tag :move4, '4つ目の技' %>
+  <%= text_field_tag :move4, params[:move4] %>
+  <%= submit_tag '絞込み' %>
+<% end %>

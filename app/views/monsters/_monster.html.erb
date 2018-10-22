@@ -1,5 +1,12 @@
 <li id="monster-<%= monster.id %>">
   <span class="monster"><%= link_to monster.nickname, monster_path(monster) %></span>
+  <span class="monster"><%= monster.gender %></span>
+  <span class="monster"><%= monster.avility %></span>
+  <span class="monster"><%= monster.nature %></span>
+  <span class="monster"><%= monster.move1 %></span>
+  <span class="monster"><%= monster.move2 %></span>
+  <span class="monster"><%= monster.move3 %></span>
+  <span class="monster"><%= monster.move4 %></span>
   <% if current_user?(monster.species_group.user) %>
     | <%= link_to 'delete', '#', method: :delete, data: {confirm: '削除して宜しいですか？'} %>
   <% end %>

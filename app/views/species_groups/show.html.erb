@@ -9,9 +9,24 @@
 </div>
 <div class="col-md-8">
   <p>育成済み<%= @species_group.species_name %>一覧</p>
+  <p>条件で絞り込む</p>
+  <%= render 'search_form' %>
   <% if @species_group.monsters.any? %>
-    <ul class="monsters">
-      <%= render @monsters %>
-    </ul>
+    <table>
+      <tr>
+        <th>ニックネーム</th>
+        <th>性別</th>
+        <th>特性</th>
+        <th>性格</th>
+        <th>技1</th>
+        <th>技2</th>
+        <th>技3</th>
+        <th>技4</th>
+        <th></th>
+      </tr>
+      <ul class="monsters">
+        <%= render @monsters %>
+      </ul>
+    </table>
   <% end %>
 </div>

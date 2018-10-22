@@ -11,4 +11,5 @@ Rails.application.routes.draw do
   resources :species_groups, shallow: true do
     resources :monsters
   end
+  get 'monsters_search', to: 'monsters#search'
 end
