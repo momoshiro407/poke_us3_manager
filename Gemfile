@@ -18,9 +18,12 @@ gem 'jquery-rails'
 gem 'faker'
 gem 'will_paginate'
 gem 'bootstrap-will_paginate'
+gem 'ransack'
+gem 'rack-mini-profiler'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'bullet'
 end
 
 group :development do

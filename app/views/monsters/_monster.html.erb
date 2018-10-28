@@ -1,6 +1,18 @@
-<li id="monster-<%= monster.id %>">
-  <span class="monster"><%= link_to monster.nickname, monster_path(monster) %></span>
-  <% if current_user?(monster.species_group.user) %>
-    | <%= link_to 'delete', '#', method: :delete, data: {confirm: '削除して宜しいですか？'} %>
-  <% end %>
-</li>
+<!--viewに直接記述しているので使用しなくなったが念のため取っておく-->
+<tr>
+  <li id="monster-<%= monster.id %>">
+    <td><%= link_to monster.nickname, monster_path(monster) %></td>
+    <td><%= monster.gender %></td>
+    <td><%= monster.avility %></td>
+    <td><%= monster.nature %></td>
+    <td><%= monster.move1 %></td>
+    <td><%= monster.move2 %></td>
+    <td><%= monster.move3 %></td>
+    <td><%= monster.move4 %></td>
+    <td>
+      <% if current_user?(monster.species_group.user) %>
+        | <%= link_to 'delete', '#', method: :delete, data: {confirm: '削除して宜しいですか？'}, style: 'width: 10%' %>
+      <% end %>
+    </td>
+  </li>
+</tr>
