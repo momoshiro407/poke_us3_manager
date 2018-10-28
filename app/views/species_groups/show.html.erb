@@ -4,15 +4,39 @@
 </div>
 <div>
   <p>
-    <%= link_to '育成済みポケモンを追加', new_species_group_monster_path(species_group_id: @species_group.id) %>
+    <%= link_to '育成済みポケモンを追加', new_species_group_monster_path(species_group_id: @species_group.id), class: 'btn new-monster-btn' %>
   </p>
 </div>
-<div class="col-md-8">
-  <p>育成済み<%= @species_group.species_name %>一覧</p>
-  <p>条件で絞り込む</p>
-  <%= render 'search_form' %>
-  <% if @species_group.monsters.any? %>
-    <table>
+<div>
+  <div class="panel-group">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" href="#collapse1">条件で絞り込む</a>
+        </h4>
+      </div>
+      <div id="collapse1" class="panel-collapse collapse">
+        <div class="panel-body">
+          <%= render 'search_form' %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% if @monsters.blank? %>
+    <p>該当するポケモンがいません！</p>
+  <% else %>
+    <table class="col-md-12">
+      <caption>育成済み<%= @species_group.species_name %>一覧</caption>
+      <colgroup style="width: 10%;"> <!-- ニックネーム -->
+      <colgroup style="width: 5%;"> <!-- 性別 -->
+      <colgroup style="width: 10%;"> <!-- 特性 -->
+      <colgroup style="width: 10%;"> <!-- 性格 -->
+      <colgroup style="width: 13%;"> <!-- 技1 -->
+      <colgroup style="width: 13%;"> <!-- 技2 -->
+      <colgroup style="width: 13%;"> <!-- 技3 -->
+      <colgroup style="width: 13%;"> <!-- 技4 -->
+      <colgroup style="width: 13%;"> <!-- アイコン -->
+      <thead class="monsters-header">
       <tr>
         <th>ニックネーム</th>
         <th>性別</th>
@@ -24,9 +48,26 @@
         <th>技4</th>
         <th></th>
       </tr>
-      <ul class="monsters">
-        <%= render @monsters %>
-      </ul>
+      </thead>
+      <tbody class="monsters">
+      <% @monsters.each do |monster| %>
+        <tr id="monster-<%= monster.id %>">
+          <td><%= link_to monster.nickname, monster_path(monster), {class: 'link'} %></td>
+          <td><%= monster.gender %></td>
+          <td><%= monster.avility %></td>
+          <td><%= monster.nature %></td>
+          <td><%= monster.move1 %></td>
+          <td><%= monster.move2 %></td>
+          <td><%= monster.move3 %></td>
+          <td><%= monster.move4 %></td>
+          <td>
+            <% if current_user?(monster.species_group.user) %>
+              | <%= link_to 'delete', '#', {method: :delete, data: {confirm: '削除して宜しいですか？'}, style: 'width: 10%', class: 'link'} %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
     </table>
   <% end %>
 </div>

@@ -1,89 +1,154 @@
 <%= render 'shared/error_messages', object: f.object %>
 <div class="basic-property">
-  <%= f.label :nickname %>
-  <%= f.text_field :nickname, class: 'form-control' %>
-  <%= f.label :gender %>
-  <%= f.text_field :gender, class: 'form-control' %>
-  <%= f.label :level %>
-  <%= f.text_field :level, class: 'form-control' %>
-  <%= f.label :avility %>
-  <%= f.text_field :avility, class: 'form-control' %>
-  <%= f.label :nature %>
-  <%= f.text_field :nature, class: 'form-control' %>
-  <%= f.label :characteristic %>
-  <%= f.text_field :characteristic, class: 'form-control' %>
-  <%= f.label :held_item %>
-  <%= f.text_field :held_item, class: 'form-control' %>
-  <%= f.label :combat_rules %>
-  <%= f.text_field :combat_rules, class: 'form-control' %>
-  <%= f.label :is_colored %>
-  <%= f.check_box :is_colored, {}, true, false %>
+  <div class="form-group">
+    <%= f.label :nickname %>
+    <%= f.text_field :nickname, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :gender %>
+    <%= f.text_field :gender, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :level %>
+    <%= f.text_field :level, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :avility %>
+    <%= f.text_field :avility, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :nature %>
+    <%= f.text_field :nature, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :characteristic %>
+    <%= f.text_field :characteristic, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :held_item %>
+    <%= f.text_field :held_item, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :combat_rules %>
+    <%= f.text_field :combat_rules, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :is_colored %>
+    <%= f.check_box :is_colored, {}, true, false %>
+  </div>
 </div>
 
-技
 <div>
-  <%= f.label :move1 %>
-  <%= f.text_field :move1, class: 'form-control' %>
-  <%= f.label :move2 %>
-  <%= f.text_field :move2, class: 'form-control' %>
-  <%= f.label :move3 %>
-  <%= f.text_field :move3, class: 'form-control' %>
-  <%= f.label :move4 %>
-  <%= f.text_field :move4, class: 'form-control' %>
+  技
+  <div class="form-group">
+    <%= f.label :move1 %>
+    <%= f.text_field :move1, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :move2 %>
+    <%= f.text_field :move2, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :move3 %>
+    <%= f.text_field :move3, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :move4 %>
+    <%= f.text_field :move4, class: 'form-control' %>
+  </div>
 </div>
 
-ステータス
 <div class="value-property">
-  <%= check_box_tag :is_caliculate %>入力した個体値と努力値からステータスを自動計算する<br>
+  ステータス
+  <div class="form-group">
+    <%= check_box_tag :is_caliculate %>入力した個体値と努力値からステータスを自動計算する<br>
+  </div>
   個体値
-  <div>
+  <div class="form-group">
     <%= f.label :hp_individual %>
     <%= f.text_field :hp_individual, class: 'form-control' %>
+  </div>
+  <div class="form-group">
     <%= f.label :attack_individual %>
     <%= f.text_field :attack_individual, class: 'form-control' %>
+  </div>
+  <div class="form-group">
     <%= f.label :defense_individual %>
     <%= f.text_field :defense_individual, class: 'form-control' %>
+  </div>
+  <div class="form-group">
     <%= f.label :sp_attack_individual %>
     <%= f.text_field :sp_attack_individual, class: 'form-control' %>
+  </div>
+  <div class="form-group">
     <%= f.label :sp_defense_individual %>
     <%= f.text_field :sp_defense_individual, class: 'form-control' %>
+  </div>
+  <div class="form-group">
     <%= f.label :speed_individual %>
     <%= f.text_field :speed_individual, class: 'form-control' %>
   </div>
+</div>
+<div>
   努力値
-  <div>
+  <div class="form-group">
     <%= f.label :hp_effort %>
     <%= f.text_field :hp_effort, class: 'form-control' %>
+  </div>
+  <div class="form-group">
     <%= f.label :attack_effort %>
     <%= f.text_field :attack_effort, class: 'form-control' %>
+  </div>
+  <div class="form-group">
     <%= f.label :defense_effort %>
     <%= f.text_field :defense_effort, class: 'form-control' %>
+  </div>
+  <div class="form-group">
     <%= f.label :sp_attack_effort %>
     <%= f.text_field :sp_attack_effort, class: 'form-control' %>
+  </div>
+  <div class="form-group">
     <%= f.label :sp_defense_effort %>
     <%= f.text_field :sp_defense_effort, class: 'form-control' %>
+  </div>
+  <div class="form-group">
     <%= f.label :speed_effort %>
     <%= f.text_field :speed_effort, class: 'form-control' %>
   </div>
+</div>
+<div>
   ステータス
-  <div>
+  <div class="form-group">
     <%= f.label :hp_statistics %>
     <%= f.text_field :hp_statistics, class: 'form-control' %>
+  </div>
+  <div class="form-group">
     <%= f.label :attack_statistics %>
     <%= f.text_field :attack_statistics, class: 'form-control' %>
+  </div>
+  <div class="form-group">
     <%= f.label :defense_statistics %>
     <%= f.text_field :defense_statistics, class: 'form-control' %>
+  </div>
+  <div class="form-group">
     <%= f.label :sp_attack_statistics %>
     <%= f.text_field :sp_attack_statistics, class: 'form-control' %>
+  </div>
+  <div class="form-group">
     <%= f.label :sp_defense_statistics %>
     <%= f.text_field :sp_defense_statistics, class: 'form-control' %>
+  </div>
+  <div class="form-group">
     <%= f.label :speed_statistics %>
     <%= f.text_field :speed_statistics, class: 'form-control' %>
   </div>
 </div>
-育成メモ
+
 <div>
-  <%= f.label :memo %>
-  <%= f.text_area :memo %>
+  育成メモ
+  <div class="form-group">
+    <%= f.label :memo %>
+    <%= f.text_area :memo, class: 'form-control' %>
+  </div>
 </div>
 
