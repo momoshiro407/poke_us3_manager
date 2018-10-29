@@ -1,5 +1,5 @@
 class MonstersController < ApplicationController
-  before_action :logged_in_user, only: [:new, :create]
+  before_action :logged_in_user, only: [:new, :create, :edit, :update]
   before_action :correct_user_monster, only: [:show]
 
   def new
@@ -16,6 +16,21 @@ class MonstersController < ApplicationController
     else
       flash[:danger]
       render 'new'
+    end
+  end
+
+  def edit
+    @monster = Monster.find(params[:id])
+  end
+
+  def update
+    @monster = Monster.find(params[:id])
+    if @monster.update_attributes(monster_params)
+      flash[:success] = '育成データを更新しました'
+      redirect_to @monster.species_group
+    else
+      flash[:danger]
+      render 'edit'
     end
   end
 

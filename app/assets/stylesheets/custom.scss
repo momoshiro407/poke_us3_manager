@@ -1,5 +1,6 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "font-awesome";
 
 /* mixins, variables, etc. */
 
@@ -182,6 +183,15 @@ select {
     background-color: #00FF00;
     color: #fff;
   }
+}
+
+/* font_awesome */
+
+.fa {
+  padding-left: 5px;
+}
+.fa-green {
+  color: green;
 }
 
 /* Users index */
