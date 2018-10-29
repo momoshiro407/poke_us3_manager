@@ -11,7 +11,8 @@
     <td><%= monster.move4 %></td>
     <td>
       <% if current_user?(monster.species_group.user) %>
-        | <%= link_to 'delete', '#', method: :delete, data: {confirm: '削除して宜しいですか？'}, style: 'width: 10%' %>
+        <%= link_to '編集', edit_monster_path(monster), style: 'width: 5%' %>
+        <%= link_to '削除', '#', method: :delete, data: {confirm: '削除して宜しいですか？'}, style: 'width: 5%' %>
       <% end %>
     </td>
   </li>
