@@ -15,12 +15,14 @@
     <%= label_tag :nature, '性格' %>
     <%= text_field_tag :nature, params[:nature], {class: 'form-control', style: 'width: 20%;'} %>
   </div>
-  <div class="form-group row">
-    <%= label_tag :move1, '技：', {class: 'col-md-4', style: 'width: 4%;'} %>
-    <%= text_field_tag :move1, params[:move1], {class: 'search-move form-control col-md-2', placeholder: '技1つ目'} %>
-    <%= text_field_tag :move2, params[:move2], {class: 'search-move form-control col-md-2', placeholder: '技2つ目'} %>
-    <%= text_field_tag :move3, params[:move3], {class: 'search-move form-control col-md-2', placeholder: '技3つ目'} %>
-    <%= text_field_tag :move4, params[:move4], {class: 'search-move form-control col-md-2', placeholder: '技4つ目'} %>
+  <div class="form-group">
+    <%= label_tag :move1, '技' %>
+    <div class="row">
+      <%= text_field_tag :move1, params[:move1], {class: 'search-move form-control col-md-3', placeholder: '技1つ目'} %>
+      <%= text_field_tag :move2, params[:move2], {class: 'search-move form-control col-md-3', placeholder: '技2つ目'} %>
+      <%= text_field_tag :move3, params[:move3], {class: 'search-move form-control col-md-3', placeholder: '技3つ目'} %>
+      <%= text_field_tag :move4, params[:move4], {class: 'search-move form-control col-md-3', placeholder: '技4つ目'} %>
+    </div>
   </div>
   <div class="form-group submit">
     <%= submit_tag '絞込み', {class: 'btn submit-btn'} %>

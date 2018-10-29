@@ -62,7 +62,12 @@
           <td><%= monster.move4 %></td>
           <td>
             <% if current_user?(monster.species_group.user) %>
-              | <%= link_to 'delete', '#', {method: :delete, data: {confirm: '削除して宜しいですか？'}, style: 'width: 10%', class: 'link'} %>
+              <%= link_to edit_monster_path(monster) do %>
+                <%= fa_icon 'edit', class: 'fa fa-green' %>
+              <% end %>
+              <%= link_to '#', {method: :delete, data: {confirm: '削除して宜しいですか？'}, style: 'width: 5%', class: 'link'} do %>
+                <%= fa_icon 'trash', class: 'fa fa-green' %>
+              <% end %>
             <% end %>
           </td>
         </tr>
