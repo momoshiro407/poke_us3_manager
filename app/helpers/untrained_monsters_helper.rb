@@ -1,0 +1,2 @@
+module UntrainedMonstersHelper
+end

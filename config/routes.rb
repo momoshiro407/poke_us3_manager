@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :users
   resources :species_groups, shallow: true do
     resources :monsters
+    resources :untrained_monsters
   end
   get 'monsters_search', to: 'monsters#search'
 end

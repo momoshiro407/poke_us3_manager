@@ -1,0 +1,2 @@
+class UntrainedMonster < ApplicationRecord
+end

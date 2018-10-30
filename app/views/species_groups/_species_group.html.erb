@@ -1,10 +1,12 @@
 <li id="species_group-<%= species_group.id %>">
-  <span class="species_group"><%= link_to species_group.species_name, species_group_path(species_group) %></span>
+  <span class="species_group"><%= species_group.species_name %></span>
   <% if current_user?(species_group.user) %>
-    | <%= link_to 'delete', species_group, method: :delete, data: {confirm: '削除して宜しいですか？'} %>
+    <%= link_to '#', {method: :delete, data: {confirm: '削除して宜しいですか？'}, style: 'width: 5%', class: 'link'} do %>
+      <%= fa_icon 'trash', class: 'fa fa-green' %>
+    <% end %>
   <% end %>
   <br>
-  <span class="number_of_trained">育成数：<%= species_group.monsters.count %></span>
+  <span class="number_of_trained"><%= link_to '育成済み', species_group_path(species_group) %>：<%= species_group.monsters.count %></span>
   <br>
-  <span class="number_of_untrained">育成予定数：0</span>
+  <span class="number_of_untrained">育成予定：0</span>
 </li>

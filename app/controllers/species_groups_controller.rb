@@ -25,7 +25,7 @@ class SpeciesGroupsController < ApplicationController
     results = Monster.with_species_group(params[:id])
     results = params[:nickname].present? ? results.search_nickname(params[:nickname]) : results
     results = params[:gender].present? ? results.search_gender(params[:gender]) : results
-    results = params[:avility].present? ? results.search_avility(params[:avility]) : results
+    results = params[:ability].present? ? results.search_ability(params[:ability]) : results
     results = params[:nature].present? ? results.search_nature(params[:nature]) : results
     moves = set_move_array(params)
     moves.each do |move|
@@ -53,7 +53,7 @@ class SpeciesGroupsController < ApplicationController
   end
 
   def search_params
-    params.require(:monsters).permit(:nickname, :gender, :avility, :nature, :move1, :move2, :move3, :move4)
+    params.require(:monsters).permit(:nickname, :gender, :ability, :nature, :move1, :move2, :move3, :move4)
   end
 
   def set_move_array(params)
