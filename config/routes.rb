@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   resources :species_groups, shallow: true do
     resources :monsters
     resources :untrained_monsters
+    get 'monster', to: 'species_groups#trained_area'
+    get 'untrained_monster', to: 'species_groups#untrained_area'
   end
   get 'monsters_search', to: 'monsters#search'
 end

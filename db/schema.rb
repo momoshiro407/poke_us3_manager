@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_30_170848) do
+ActiveRecord::Schema.define(version: 2018_12_10_151508) do
 
   create_table "base_stats_units", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "species_id"
@@ -106,19 +106,19 @@ ActiveRecord::Schema.define(version: 2018_10_30_170848) do
     t.integer "defense_statistics"
     t.integer "sp_attack_statistics"
     t.integer "sp_defense_statistics"
-    t.integer "seed_statistics"
+    t.integer "speed_statistics"
     t.integer "hp_individual"
     t.integer "attack_individual"
     t.integer "defense_individual"
     t.integer "sp_attack_individual"
     t.integer "sp_defense_individual"
-    t.integer "seed_individual"
+    t.integer "speed_individual"
     t.integer "hp_effort"
     t.integer "attack_effort"
     t.integer "defense_effort"
     t.integer "sp_attack_effort"
     t.integer "sp_defense_effort"
-    t.integer "seed_effort"
+    t.integer "speed_effort"
     t.text "memo"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

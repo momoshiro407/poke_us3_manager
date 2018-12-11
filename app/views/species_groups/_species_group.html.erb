@@ -6,7 +6,7 @@
     <% end %>
   <% end %>
   <br>
-  <span class="number_of_trained"><%= link_to '育成済み', species_group_path(species_group) %>：<%= species_group.monsters.count %></span>
+  <span class="number_of_trained"><%= link_to '育成済み', species_group_monster_path(species_group) %>：<%= species_group.monsters.count %></span>
   <br>
-  <span class="number_of_untrained">育成予定：0</span>
+  <span class="number_of_untrained"><%= link_to '育成予定', species_group_untrained_monster_path(species_group) %>：<%= species_group.untrained_monsters.count %></span>
 </li>
