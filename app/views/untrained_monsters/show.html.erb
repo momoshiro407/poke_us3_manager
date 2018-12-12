@@ -1,0 +1,117 @@
+<div>
+  <p><%= @untrained_monster.nickname %></p><%= p '★' if @untrained_monster.is_colored %>
+</div>
+<div>
+  <table border="1">
+    <tr>
+      <th>レベル</th>
+      <th>性別</th>
+      <th>性格</th>
+      <th>個性</th>
+      <th>特性</th>
+      <th>基本的な持ち物</th>
+      <th>想定ルール</th>
+    </tr>
+    <tr>
+      <td><%= @untrained_monster.level %></td>
+      <td><%= @untrained_monster.gender %></td>
+      <td><%= @untrained_monster.nature %></td>
+      <td><%= @untrained_monster.characteristic %></td>
+      <td><%= @untrained_monster.ability %></td>
+      <td><%= @untrained_monster.held_item %></td>
+      <td><%= @untrained_monster.combat_rules %></td>
+    </tr>
+  </table>
+</div>
+<br>
+<div>
+  覚えている技
+  <table border="1">
+    <tr>
+      <th>技名</th>
+      <th>タイプ</th>
+      <th>威力</th>
+      <th>PP</th>
+    </tr>
+    <tr>
+      <td><%= @untrained_monster.move1 %></td>
+      <td>くさ</td>
+      <td>100</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <td><%= @untrained_monster.move2 %></td>
+      <td>くさ</td>
+      <td>100</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <td><%= @untrained_monster.move3 %></td>
+      <td>くさ</td>
+      <td>100</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <td><%= @untrained_monster.move4 %></td>
+      <td>くさ</td>
+      <td>100</td>
+      <td>10</td>
+    </tr>
+  </table>
+</div>
+<br>
+<div>
+  ステータス
+  <table border="1">
+    <tr>
+      <th></th>
+      <th>HP</th>
+      <th>こうげき</th>
+      <th>ぼうぎょ</th>
+      <th>とくこう</th>
+      <th>とくぼう</th>
+      <th>すばやさ</th>
+    </tr>
+    <tr>
+      <td>個体値</td>
+      <td><%= @untrained_monster.hp_individual %></td>
+      <td><%= @untrained_monster.attack_individual %></td>
+      <td><%= @untrained_monster.defense_individual %></td>
+      <td><%= @untrained_monster.sp_attack_individual %></td>
+      <td><%= @untrained_monster.sp_defense_individual %></td>
+      <td><%= @untrained_monster.speed_individual %></td>
+    </tr>
+    <tr>
+      <td>努力値</td>
+      <td><%= @untrained_monster.hp_effort %></td>
+      <td><%= @untrained_monster.attack_effort %></td>
+      <td><%= @untrained_monster.defense_effort %></td>
+      <td><%= @untrained_monster.sp_attack_effort %></td>
+      <td><%= @untrained_monster.sp_defense_effort %></td>
+      <td><%= @untrained_monster.speed_effort %></td>
+    </tr>
+    <tr>
+      <td>ステータス実数値</td>
+      <td><%= @untrained_monster.hp_statistics %></td>
+      <td><%= @untrained_monster.attack_statistics %></td>
+      <td><%= @untrained_monster.defense_statistics %></td>
+      <td><%= @untrained_monster.sp_attack_statistics %></td>
+      <td><%= @untrained_monster.sp_defense_statistics %></td>
+      <td><%= @untrained_monster.speed_statistics %></td>
+    </tr>
+  </table>
+</div>
+<br>
+<div>
+  <table border="1">
+    <tr>
+      <th>育成メモ</th>
+    </tr>
+    <tr>
+      <td><%= @untrained_monster.memo %></td>
+    </tr>
+  </table>
+</div>
+
+
+

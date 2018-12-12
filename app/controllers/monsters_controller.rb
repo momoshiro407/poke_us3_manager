@@ -1,6 +1,6 @@
 class MonstersController < ApplicationController
   before_action :logged_in_user, only: [:new, :create, :edit, :update]
-  before_action :correct_user_monster, only: [:show]
+  before_action :correct_user_monster, only: [:show, :destroy]
 
   def new
     @monster = Monster.new
@@ -12,7 +12,7 @@ class MonstersController < ApplicationController
     if @monster.save
       log_in @monster.species_group.user
       flash[:success] = '育成済みポケモンを作成しました'
-      redirect_to @monster.species_group
+      redirect_to species_group_monster_path(species_group.id)
     else
       flash[:danger]
       render 'new'
@@ -27,7 +27,7 @@ class MonstersController < ApplicationController
     @monster = Monster.find(params[:id])
     if @monster.update_attributes(monster_params)
       flash[:success] = '育成データを更新しました'
-      redirect_to @monster.species_group
+      redirect_to species_group_monster_path(@monster.species_group.id)
     else
       flash[:danger]
       render 'edit'
@@ -38,10 +38,17 @@ class MonstersController < ApplicationController
     @monster = Monster.find(params[:id])
   end
 
+  def destroy
+    @monster = Monster.find(params[:id])
+    @monster.destroy
+    flash[:success] = 'データを削除しました'
+    redirect_to request.referrer
+  end
+
   private
 
   def monster_params
-    params.require(:monster).permit(:nickname, :gender, :level, :avility, :nature, :characteristic,
+    params.require(:monster).permit(:nickname, :gender, :level, :ability, :nature, :characteristic,
                                     :type1, :type2, :move1, :move2, :move3, :move4, :held_item, :combat_rules,
                                     :is_colored, :hp_statistics, :attack_statistics, :defense_statistics,
                                     :sp_attack_statistics, :sp_defense_statistics, :speed_statistics,

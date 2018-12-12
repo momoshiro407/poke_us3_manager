@@ -1,6 +1,6 @@
 class SpeciesGroupsController < ApplicationController
   before_action :logged_in_user, only: [:new, :create, :destroy]
-  before_action :correct_user_species_group, only: [:show]
+  # before_action :correct_user_species_group, only: [:show]
 
   def new
     @species_group = SpeciesGroup.new
@@ -20,18 +20,25 @@ class SpeciesGroupsController < ApplicationController
     end
   end
 
-  def show
-    @species_group = SpeciesGroup.find(params[:id])
-    results = Monster.with_species_group(params[:id])
+  def trained_area
+    correct_user_species_group
+    @species_group = SpeciesGroup.find(params[:species_group_id])
+    results = Monster.with_species_group(params[:species_group_id])
     results = params[:nickname].present? ? results.search_nickname(params[:nickname]) : results
     results = params[:gender].present? ? results.search_gender(params[:gender]) : results
-    results = params[:avility].present? ? results.search_avility(params[:avility]) : results
+    results = params[:ability].present? ? results.search_ability(params[:ability]) : results
     results = params[:nature].present? ? results.search_nature(params[:nature]) : results
     moves = set_move_array(params)
     moves.each do |move|
       results = move.present? ? results.search_move(move) : results
     end
     @monsters = results.includes(:species_group).paginate(page: params[:page])
+  end
+
+  def untrained_area
+    correct_user_species_group
+    @species_group = SpeciesGroup.find(params[:species_group_id])
+    @untrained_monsters = UntrainedMonster.with_species_group(params[:species_group_id])
   end
 
   def search
@@ -48,12 +55,12 @@ class SpeciesGroupsController < ApplicationController
   end
 
   def correct_user_species_group
-    species_group = SpeciesGroup.find(params[:id])
+    species_group = SpeciesGroup.find(params[:species_group_id])
     redirect_to(root_url) unless current_user?(species_group.user)
   end
 
   def search_params
-    params.require(:monsters).permit(:nickname, :gender, :avility, :nature, :move1, :move2, :move3, :move4)
+    params.require(:monsters).permit(:nickname, :gender, :ability, :nature, :move1, :move2, :move3, :move4)
   end
 
   def set_move_array(params)

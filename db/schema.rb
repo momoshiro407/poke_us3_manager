@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_10_170359) do
+ActiveRecord::Schema.define(version: 2018_12_10_151508) do
 
   create_table "base_stats_units", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "species_id"
@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 2018_10_10_170359) do
     t.string "nickname"
     t.string "gender"
     t.integer "level"
-    t.string "avility"
+    t.string "ability"
     t.string "nature"
     t.string "characteristic"
     t.string "type1"
@@ -84,6 +84,47 @@ ActiveRecord::Schema.define(version: 2018_10_10_170359) do
     t.index ["user_id"], name: "index_species_groups_on_user_id"
   end
 
+  create_table "untrained_monsters", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "species_group_id"
+    t.string "nickname"
+    t.string "gender"
+    t.integer "level"
+    t.string "ability"
+    t.string "nature"
+    t.string "characteristic"
+    t.string "type1"
+    t.string "type2"
+    t.string "move1"
+    t.string "move2"
+    t.string "move3"
+    t.string "move4"
+    t.string "held_item"
+    t.string "combat_rules"
+    t.boolean "is_colored"
+    t.integer "hp_statistics"
+    t.integer "attack_statistics"
+    t.integer "defense_statistics"
+    t.integer "sp_attack_statistics"
+    t.integer "sp_defense_statistics"
+    t.integer "speed_statistics"
+    t.integer "hp_individual"
+    t.integer "attack_individual"
+    t.integer "defense_individual"
+    t.integer "sp_attack_individual"
+    t.integer "sp_defense_individual"
+    t.integer "speed_individual"
+    t.integer "hp_effort"
+    t.integer "attack_effort"
+    t.integer "defense_effort"
+    t.integer "sp_attack_effort"
+    t.integer "sp_defense_effort"
+    t.integer "speed_effort"
+    t.text "memo"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["species_group_id"], name: "index_untrained_monsters_on_species_group_id"
+  end
+
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
     t.string "email", null: false
@@ -97,4 +138,5 @@ ActiveRecord::Schema.define(version: 2018_10_10_170359) do
   add_foreign_key "base_stats_units", "species"
   add_foreign_key "monsters", "species_groups"
   add_foreign_key "species_groups", "users"
+  add_foreign_key "untrained_monsters", "species_groups"
 end
