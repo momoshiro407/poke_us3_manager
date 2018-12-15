@@ -38,7 +38,17 @@ class SpeciesGroupsController < ApplicationController
   def untrained_area
     correct_user_species_group
     @species_group = SpeciesGroup.find(params[:species_group_id])
-    @untrained_monsters = UntrainedMonster.with_species_group(params[:species_group_id])
+    results = UntrainedMonster.with_species_group(params[:species_group_id])
+    results = params[:nickname].present? ? results.search_nickname(params[:nickname]) : results
+    results = params[:gender].present? ? results.search_gender(params[:gender]) : results
+    results = params[:ability].present? ? results.search_ability(params[:ability]) : results
+    results = params[:nature].present? ? results.search_nature(params[:nature]) : results
+    moves = set_move_array(params)
+    moves.each do |move|
+      results = move.present? ? results.search_move(move) : results
+    end
+    @untrained_monsters = results.includes(:species_group).paginate(page: params[:page])
+    # TODO: monsterの検索処理と丸かぶりなので後で1つにまとめる
   end
 
   def search
