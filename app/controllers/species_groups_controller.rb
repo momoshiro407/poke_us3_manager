@@ -1,6 +1,5 @@
 class SpeciesGroupsController < ApplicationController
   before_action :logged_in_user, only: [:new, :create, :destroy]
-  # before_action :correct_user_species_group, only: [:show]
 
   def new
     @species_group = SpeciesGroup.new
@@ -56,6 +55,31 @@ class SpeciesGroupsController < ApplicationController
     monsters = @species_group.monsters
     @q = monsters.search(search_params)
     @monsters = @q.result(distinct: true)
+  end
+
+  def monsters_transfer
+    if params[:transfers].nil?
+      flash[:danger] = '転送するデータにチェックを付けてください'
+      redirect_to species_group_untrained_monster_url
+    else
+      ActiveRecord::Base.transaction do
+        params[:transfers].keys.each do |transfer_id|
+          untrained_monster_params = UntrainedMonster.find(transfer_id).attributes
+          untrained_monster_params.delete('id')
+          untrained_monster_params.delete('created_at')
+          untrained_monster_params.delete('updated_at')
+          monster = Monster.new(untrained_monster_params)
+          if monster.save!
+            UntrainedMonster.find(transfer_id).destroy!
+          else
+            flash[:danger] = 'エラーが発生しました'
+            redirect_to species_group_untrained_monster_url
+          end
+        end
+        flash[:success] = '育成済みページへ転送しました'
+        redirect_to species_group_untrained_monster_url
+      end
+    end
   end
 
   private

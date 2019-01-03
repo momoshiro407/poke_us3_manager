@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   resources :users
   resources :species_groups, shallow: true do
+    patch 'monsters_transfer', to: 'species_groups#monsters_transfer'
     resources :monsters
     resources :untrained_monsters
     get 'monster', to: 'species_groups#trained_area'
