@@ -25,54 +25,64 @@
   <% if @untrained_monsters.blank? %>
     <p>該当するポケモンがいません！</p>
   <% else %>
-    <table class="col-md-12">
-      <caption>育成予定<%= @species_group.species_name %>一覧</caption>
-      <colgroup style="width: 10%;"> <!-- ニックネーム -->
-      <colgroup style="width: 5%;"> <!-- 性別 -->
-      <colgroup style="width: 10%;"> <!-- 特性 -->
-      <colgroup style="width: 10%;"> <!-- 性格 -->
-      <colgroup style="width: 13%;"> <!-- 技1 -->
-      <colgroup style="width: 13%;"> <!-- 技2 -->
-      <colgroup style="width: 13%;"> <!-- 技3 -->
-      <colgroup style="width: 13%;"> <!-- 技4 -->
-      <colgroup style="width: 13%;"> <!-- アイコン -->
-      <thead class="monsters-header">
-      <tr>
-        <th>ニックネーム</th>
-        <th>性別</th>
-        <th>特性</th>
-        <th>性格</th>
-        <th>技1</th>
-        <th>技2</th>
-        <th>技3</th>
-        <th>技4</th>
-        <th></th>
-      </tr>
-      </thead>
-      <tbody class="monsters">
-      <% @untrained_monsters.each do |untrained_monster| %>
-        <tr id="monster-<%= untrained_monster.id %>">
-          <td><%= link_to untrained_monster.nickname, untrained_monster_path(untrained_monster), {class: 'link'} %></td>
-          <td><%= untrained_monster.gender %></td>
-          <td><%= untrained_monster.ability %></td>
-          <td><%= untrained_monster.nature %></td>
-          <td><%= untrained_monster.move1 %></td>
-          <td><%= untrained_monster.move2 %></td>
-          <td><%= untrained_monster.move3 %></td>
-          <td><%= untrained_monster.move4 %></td>
-          <td>
-            <% if current_user?(untrained_monster.species_group.user) %>
-              <%= link_to edit_untrained_monster_path(untrained_monster) do %>
-                <%= fa_icon 'edit', class: 'fa fa-green' %>
-              <% end %>
-              <%= link_to untrained_monster_path(untrained_monster.id), {method: :delete, data: {confirm: '削除して宜しいですか？'}, style: 'width: 5%', class: 'link'} do %>
-                <%= fa_icon 'trash', class: 'fa fa-green' %>
-              <% end %>
-            <% end %>
-          </td>
+    <%= form_tag(species_group_monsters_transfer_path, method: :patch) do %>
+      <table class="col-md-12">
+        <caption>育成予定<%= @species_group.species_name %>一覧</caption>
+        <colgroup style="width: 10%;"> <!-- ニックネーム -->
+        <colgroup style="width: 5%;"> <!-- 性別 -->
+        <colgroup style="width: 10%;"> <!-- 特性 -->
+        <colgroup style="width: 10%;"> <!-- 性格 -->
+        <colgroup style="width: 13%;"> <!-- 技1 -->
+        <colgroup style="width: 13%;"> <!-- 技2 -->
+        <colgroup style="width: 13%;"> <!-- 技3 -->
+        <colgroup style="width: 13%;"> <!-- 技4 -->
+        <colgroup style="width: 10%;"> <!-- アイコン -->
+        <colgroup style="width: 3%;"> <!-- チェックボックス -->
+        <thead class="monsters-header">
+        <tr>
+          <th>ニックネーム</th>
+          <th>性別</th>
+          <th>特性</th>
+          <th>性格</th>
+          <th>技1</th>
+          <th>技2</th>
+          <th>技3</th>
+          <th>技4</th>
+          <th></th>
+          <th></th>
         </tr>
-      <% end %>
-      </tbody>
-    </table>
+        </thead>
+        <tbody class="monsters">
+        <% @untrained_monsters.each do |untrained_monster| %>
+          <tr id="monster-<%= untrained_monster.id %>">
+            <td><%= link_to untrained_monster.nickname, untrained_monster_path(untrained_monster), {class: 'link'} %></td>
+            <td><%= untrained_monster.gender %></td>
+            <td><%= untrained_monster.ability %></td>
+            <td><%= untrained_monster.nature %></td>
+            <td><%= untrained_monster.move1 %></td>
+            <td><%= untrained_monster.move2 %></td>
+            <td><%= untrained_monster.move3 %></td>
+            <td><%= untrained_monster.move4 %></td>
+            <td>
+              <% if current_user?(untrained_monster.species_group.user) %>
+                <%= link_to edit_untrained_monster_path(untrained_monster) do %>
+                  <%= fa_icon 'edit', class: 'fa fa-green' %>
+                <% end %>
+                <%= link_to untrained_monster_path(untrained_monster.id), {method: :delete, data: {confirm: '削除して宜しいですか？'}, style: 'width: 5%', class: 'link'} do %>
+                  <%= fa_icon 'trash', class: 'fa fa-green' %>
+                <% end %>
+              <% end %>
+            </td>
+            <td>
+              <% if current_user?(untrained_monster.species_group.user) %>
+                <%= check_box_tag "transfers[#{untrained_monster.id}]" %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+      <%= submit_tag '育成済みページへ転送', {class: 'btn new-monster-btn', style: 'margin-top: 20px;'} %>
+    <% end %>
   <% end %>
 </div>
