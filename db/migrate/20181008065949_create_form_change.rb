@@ -1,9 +1,9 @@
-class CreateSpecies < ActiveRecord::Migration[5.2]
+class CreateFormChange < ActiveRecord::Migration[5.2]
   def change
-    create_table :species do |t|
+    create_table :form_changes do |t|
+      t.references :species, foreign_key: true
       t.integer :number, null: false
       t.string :name, null: false
-      t.boolean :is_form_change, null: false
       t.string :type1
       t.string :type2
       t.string :ability1

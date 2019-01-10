@@ -10,20 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_10_151508) do
+ActiveRecord::Schema.define(version: 2018_10_30_170848) do
 
-  create_table "base_stats_units", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "form_changes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "species_id"
-    t.integer "form"
-    t.integer "hit_point"
-    t.integer "attack"
-    t.integer "defense"
-    t.integer "special_attack"
-    t.integer "special_defense"
-    t.integer "speed"
+    t.integer "number", null: false
+    t.string "name", null: false
+    t.string "type1"
+    t.string "type2"
+    t.string "ability1"
+    t.string "ability2"
+    t.string "ability3"
+    t.integer "hit_point", null: false
+    t.integer "attack", null: false
+    t.integer "defense", null: false
+    t.integer "special_attack", null: false
+    t.integer "special_defense", null: false
+    t.integer "speed", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["species_id"], name: "index_base_stats_units_on_species_id"
+    t.index ["species_id"], name: "index_form_changes_on_species_id"
   end
 
   create_table "monsters", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -34,14 +40,13 @@ ActiveRecord::Schema.define(version: 2018_12_10_151508) do
     t.string "ability"
     t.string "nature"
     t.string "characteristic"
-    t.string "type1"
-    t.string "type2"
     t.string "move1"
     t.string "move2"
     t.string "move3"
     t.string "move4"
     t.string "held_item"
     t.string "combat_rules"
+    t.string "ball"
     t.boolean "is_colored"
     t.integer "hp_statistics"
     t.integer "attack_statistics"
@@ -71,6 +76,17 @@ ActiveRecord::Schema.define(version: 2018_12_10_151508) do
     t.integer "number", null: false
     t.string "name", null: false
     t.boolean "is_form_change", null: false
+    t.string "type1"
+    t.string "type2"
+    t.string "ability1"
+    t.string "ability2"
+    t.string "ability3"
+    t.integer "hit_point", null: false
+    t.integer "attack", null: false
+    t.integer "defense", null: false
+    t.integer "special_attack", null: false
+    t.integer "special_defense", null: false
+    t.integer "speed", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -92,14 +108,13 @@ ActiveRecord::Schema.define(version: 2018_12_10_151508) do
     t.string "ability"
     t.string "nature"
     t.string "characteristic"
-    t.string "type1"
-    t.string "type2"
     t.string "move1"
     t.string "move2"
     t.string "move3"
     t.string "move4"
     t.string "held_item"
     t.string "combat_rules"
+    t.string "ball"
     t.boolean "is_colored"
     t.integer "hp_statistics"
     t.integer "attack_statistics"
@@ -135,7 +150,7 @@ ActiveRecord::Schema.define(version: 2018_12_10_151508) do
     t.boolean "admin", default: false
   end
 
-  add_foreign_key "base_stats_units", "species"
+  add_foreign_key "form_changes", "species"
   add_foreign_key "monsters", "species_groups"
   add_foreign_key "species_groups", "users"
   add_foreign_key "untrained_monsters", "species_groups"
