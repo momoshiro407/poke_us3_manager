@@ -16,6 +16,8 @@ ActiveRecord::Schema.define(version: 2018_10_30_170848) do
     t.bigint "species_id"
     t.integer "number", null: false
     t.string "name", null: false
+    t.boolean "is_mega_evolution", null: false
+    t.string "form"
     t.string "type1"
     t.string "type2"
     t.string "ability1"
@@ -76,6 +78,7 @@ ActiveRecord::Schema.define(version: 2018_10_30_170848) do
     t.integer "number", null: false
     t.string "name", null: false
     t.boolean "is_form_change", null: false
+    t.string "form"
     t.string "type1"
     t.string "type2"
     t.string "ability1"

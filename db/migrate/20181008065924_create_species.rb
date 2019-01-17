@@ -4,6 +4,7 @@ class CreateSpecies < ActiveRecord::Migration[5.2]
       t.integer :number, null: false
       t.string :name, null: false
       t.boolean :is_form_change, null: false
+      t.string :form
       t.string :type1
       t.string :type2
       t.string :ability1

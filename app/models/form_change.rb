@@ -1,3 +1,3 @@
 class FormChange < ApplicationRecord
-  belongs_to :species
+  belongs_to :species, optional: true
 end

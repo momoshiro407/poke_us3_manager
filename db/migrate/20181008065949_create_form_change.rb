@@ -4,6 +4,8 @@ class CreateFormChange < ActiveRecord::Migration[5.2]
       t.references :species, foreign_key: true
       t.integer :number, null: false
       t.string :name, null: false
+      t.boolean :is_mega_evolution, null: false
+      t.string :form
       t.string :type1
       t.string :type2
       t.string :ability1
