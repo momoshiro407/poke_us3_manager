@@ -1,4 +1,4 @@
 class Species < ApplicationRecord
   has_many :species_groups
-  has_one :base_stats_unit
+  has_many :form_changes
 end
