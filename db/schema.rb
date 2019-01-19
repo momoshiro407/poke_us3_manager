@@ -10,19 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_30_170848) do
+ActiveRecord::Schema.define(version: 2019_01_18_142711) do
 
-  create_table "form_changes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "abilities", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "ability_name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "base_status_abilities", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "base_status_id"
+    t.bigint "ability_id"
+    t.index ["ability_id"], name: "index_base_status_abilities_on_ability_id"
+    t.index ["base_status_id"], name: "index_base_status_abilities_on_base_status_id"
+  end
+
+  create_table "base_status_types", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "base_status_id"
+    t.bigint "type_id"
+    t.index ["base_status_id"], name: "index_base_status_types_on_base_status_id"
+    t.index ["type_id"], name: "index_base_status_types_on_type_id"
+  end
+
+  create_table "base_statuses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "species_id"
-    t.integer "number", null: false
-    t.string "name", null: false
-    t.boolean "is_mega_evolution", null: false
-    t.string "form"
-    t.string "type1"
-    t.string "type2"
-    t.string "ability1"
-    t.string "ability2"
-    t.string "ability3"
+    t.integer "form_kind", null: false
+    t.string "form_name"
     t.integer "hit_point", null: false
     t.integer "attack", null: false
     t.integer "defense", null: false
@@ -31,7 +44,7 @@ ActiveRecord::Schema.define(version: 2018_10_30_170848) do
     t.integer "speed", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["species_id"], name: "index_form_changes_on_species_id"
+    t.index ["species_id"], name: "index_base_statuses_on_species_id"
   end
 
   create_table "monsters", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -77,19 +90,8 @@ ActiveRecord::Schema.define(version: 2018_10_30_170848) do
   create_table "species", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "number", null: false
     t.string "name", null: false
+    t.boolean "is_mega_evolution", null: false
     t.boolean "is_form_change", null: false
-    t.string "form"
-    t.string "type1"
-    t.string "type2"
-    t.string "ability1"
-    t.string "ability2"
-    t.string "ability3"
-    t.integer "hit_point", null: false
-    t.integer "attack", null: false
-    t.integer "defense", null: false
-    t.integer "special_attack", null: false
-    t.integer "special_defense", null: false
-    t.integer "speed", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -101,6 +103,12 @@ ActiveRecord::Schema.define(version: 2018_10_30_170848) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_species_groups_on_user_id"
+  end
+
+  create_table "types", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "type_name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "untrained_monsters", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -153,7 +161,11 @@ ActiveRecord::Schema.define(version: 2018_10_30_170848) do
     t.boolean "admin", default: false
   end
 
-  add_foreign_key "form_changes", "species"
+  add_foreign_key "base_status_abilities", "abilities"
+  add_foreign_key "base_status_abilities", "base_statuses"
+  add_foreign_key "base_status_types", "base_statuses"
+  add_foreign_key "base_status_types", "types"
+  add_foreign_key "base_statuses", "species"
   add_foreign_key "monsters", "species_groups"
   add_foreign_key "species_groups", "users"
   add_foreign_key "untrained_monsters", "species_groups"
