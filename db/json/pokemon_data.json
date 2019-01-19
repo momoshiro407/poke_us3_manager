@@ -2203,7 +2203,7 @@
     "evolutions": [99],
     "types": ["みず"],
     "abilities": ["かいりきバサミ", "シェルアーマー"],
-    "hiddenAbilities": ["ちからづく"],
+    "hiddenAbilities": ["ちからずく"],
     "stats": {
       "hp": 30,
       "attack": 105,
@@ -2221,7 +2221,7 @@
     "evolutions": [],
     "types": ["みず"],
     "abilities": ["かいりきバサミ", "シェルアーマー"],
-    "hiddenAbilities": ["ちからづく"],
+    "hiddenAbilities": ["ちからずく"],
     "stats": {
       "hp": 55,
       "attack": 130,
@@ -3192,7 +3192,7 @@
     "isMegaEvolution": false,
     "evolutions": [148],
     "types": ["ドラゴン"],
-    "abilities": ["だっび"],
+    "abilities": ["だっぴ"],
     "hiddenAbilities": ["ふしぎなうろこ"],
     "stats": {
       "hp": 41,
@@ -3210,7 +3210,7 @@
     "isMegaEvolution": false,
     "evolutions": [149],
     "types": ["ドラゴン"],
-    "abilities": ["だっび"],
+    "abilities": ["だっぴ"],
     "hiddenAbilities": ["ふしぎなうろこ"],
     "stats": {
       "hp": 61,

@@ -20,16 +20,16 @@ ActiveRecord::Schema.define(version: 2019_01_18_142711) do
 
   create_table "base_status_abilities", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "base_status_id"
-    t.bigint "abilities_id"
-    t.index ["abilities_id"], name: "index_base_status_abilities_on_abilities_id"
+    t.bigint "ability_id"
+    t.index ["ability_id"], name: "index_base_status_abilities_on_ability_id"
     t.index ["base_status_id"], name: "index_base_status_abilities_on_base_status_id"
   end
 
   create_table "base_status_types", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "base_status_id"
-    t.bigint "types_id"
+    t.bigint "type_id"
     t.index ["base_status_id"], name: "index_base_status_types_on_base_status_id"
-    t.index ["types_id"], name: "index_base_status_types_on_types_id"
+    t.index ["type_id"], name: "index_base_status_types_on_type_id"
   end
 
   create_table "base_statuses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -161,10 +161,10 @@ ActiveRecord::Schema.define(version: 2019_01_18_142711) do
     t.boolean "admin", default: false
   end
 
-  add_foreign_key "base_status_abilities", "abilities", column: "abilities_id"
+  add_foreign_key "base_status_abilities", "abilities"
   add_foreign_key "base_status_abilities", "base_statuses"
   add_foreign_key "base_status_types", "base_statuses"
-  add_foreign_key "base_status_types", "types", column: "types_id"
+  add_foreign_key "base_status_types", "types"
   add_foreign_key "base_statuses", "species"
   add_foreign_key "monsters", "species_groups"
   add_foreign_key "species_groups", "users"
