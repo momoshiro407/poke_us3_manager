@@ -16,4 +16,6 @@ Rails.application.routes.draw do
     get 'untrained_monster', to: 'species_groups#untrained_area'
   end
   get 'monsters_search', to: 'monsters#search'
+  get 'change_abilities_select', to: 'monsters#change_abilities_select'
+  get 'change_abilities_select_untrained', to: 'untrained_monsters#change_abilities_select_untrained'
 end

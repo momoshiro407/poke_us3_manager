@@ -5,7 +5,7 @@ class CreateUntrainedMonsters < ActiveRecord::Migration[5.2]
       t.string :nickname
       t.string :gender
       t.integer :level
-      t.string :ability
+      t.integer :ability_id
       t.string :nature
       t.string :characteristic
       t.string :move1

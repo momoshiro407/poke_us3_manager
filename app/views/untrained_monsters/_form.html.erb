@@ -13,9 +13,22 @@
     <%= f.label :level %>
     <%= f.text_field :level, class: 'form-control' %>
   </div>
+  <% if @species.is_mega_evolution %>
+    <% # TODO: メガストーン必須なので持ち物フォームと連動してチェックする %>
+    <div class="form-group">
+      <%= f.label :base_status_id %>
+      <%= f.collection_select :base_status_id, BaseStatus.where(species_id: @species.id), :id, :form_name %>
+    </div>
+  <% end %>
+  <% if @species.is_form_change %>
+    <div class="form-group">
+      <%= f.label :base_status_id %>
+      <%= f.collection_select :base_status_id, BaseStatus.where(species_id: @species.id), :id, :form_name %>
+    </div>
+  <% end %>
   <div class="form-group">
-    <%= f.label :ability %>
-    <%= f.text_field :ability, class: 'form-control' %>
+    <%= f.label :ability_id %>
+    <%= f.collection_select :ability_id, @abilities, :id, :ability_name %>
   </div>
   <div class="form-group">
     <%= f.label :nature %>
@@ -153,3 +166,13 @@
   </div>
 </div>
 
+<script>
+    $(function () {
+        $('#untrained_monster_base_status_id').change(function () {
+            $.get({
+                url: '/change_abilities_select_untrained',
+                data: {base_status_id: $('#untrained_monster_base_status_id').has('option:selected').val()}
+            });
+        });
+    });
+</script>

@@ -18,7 +18,7 @@
       <td><%= @monster.gender %></td>
       <td><%= @monster.nature %></td>
       <td><%= @monster.characteristic %></td>
-      <td><%= @monster.ability %></td>
+      <td><%= Ability.find(@monster.ability_id).ability_name %></td>
       <td><%= @monster.held_item %></td>
       <td><%= @monster.combat_rules %></td>
     </tr>

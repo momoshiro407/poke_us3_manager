@@ -17,7 +17,7 @@
       <td><%= @untrained_monster.gender %></td>
       <td><%= @untrained_monster.nature %></td>
       <td><%= @untrained_monster.characteristic %></td>
-      <td><%= @untrained_monster.ability %></td>
+      <td><%= Ability.find(@untrained_monster.ability_id).ability_name %></td>
       <td><%= @untrained_monster.held_item %></td>
       <td><%= @untrained_monster.combat_rules %></td>
     </tr>

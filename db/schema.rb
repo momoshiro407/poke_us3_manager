@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_18_142711) do
+ActiveRecord::Schema.define(version: 2019_01_20_062929) do
 
   create_table "abilities", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "ability_name", null: false
@@ -52,7 +52,7 @@ ActiveRecord::Schema.define(version: 2019_01_18_142711) do
     t.string "nickname"
     t.string "gender"
     t.integer "level"
-    t.string "ability"
+    t.integer "ability_id"
     t.string "nature"
     t.string "characteristic"
     t.string "move1"
@@ -84,6 +84,7 @@ ActiveRecord::Schema.define(version: 2019_01_18_142711) do
     t.text "memo"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "base_status_id"
     t.index ["species_group_id"], name: "index_monsters_on_species_group_id"
   end
 
@@ -116,7 +117,7 @@ ActiveRecord::Schema.define(version: 2019_01_18_142711) do
     t.string "nickname"
     t.string "gender"
     t.integer "level"
-    t.string "ability"
+    t.integer "ability_id"
     t.string "nature"
     t.string "characteristic"
     t.string "move1"
@@ -148,6 +149,7 @@ ActiveRecord::Schema.define(version: 2019_01_18_142711) do
     t.text "memo"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "base_status_id"
     t.index ["species_group_id"], name: "index_untrained_monsters_on_species_group_id"
   end
 
