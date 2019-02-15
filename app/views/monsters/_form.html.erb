@@ -6,7 +6,7 @@
   </div>
   <div class="form-group">
     <%= f.label :gender %>
-    <%= f.text_field :gender, class: 'form-control' %>
+    <%= f.select :gender, options_for_select(get_enum_array(:gender), get_enum_value_by_number(:gender, @monster.gender)), {class: 'form-control', include_blank: '選択してください'} %>
   </div>
   <div class="form-group">
     <%= f.label :level %>
@@ -42,8 +42,8 @@
     <%= f.text_field :held_item, class: 'form-control' %>
   </div>
   <div class="form-group">
-    <%= f.label :combat_rules %>
-    <%= f.text_field :combat_rules, class: 'form-control' %>
+    <%= f.label :combat_rule %>
+    <%= f.select :combat_rule, options_for_select(get_enum_array(:combat_rule), get_enum_value_by_number(:combat_rule, @monster.combat_rule)), {class: 'form-control', include_blank: '選択してください'} %>
   </div>
   <div class="form-group">
     <%= f.label :is_colored %>

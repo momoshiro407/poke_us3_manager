@@ -63,7 +63,7 @@ class MonstersController < ApplicationController
 
   def monster_params
     params.require(:monster).permit(:nickname, :gender, :level, :ability_id, :nature, :characteristic,
-                                    :type1, :type2, :move1, :move2, :move3, :move4, :held_item, :combat_rules,
+                                    :type1, :type2, :move1, :move2, :move3, :move4, :held_item, :combat_rule,
                                     :is_colored, :hp_statistics, :attack_statistics, :defense_statistics,
                                     :sp_attack_statistics, :sp_defense_statistics, :speed_statistics,
                                     :hp_individual, :attack_individual, :defense_individual, :sp_attack_individual,

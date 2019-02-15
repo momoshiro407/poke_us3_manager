@@ -3,7 +3,7 @@ class CreateUntrainedMonsters < ActiveRecord::Migration[5.2]
     create_table :untrained_monsters do |t|
       t.references :species_group, foreign_key: true
       t.string :nickname
-      t.string :gender
+      t.integer :gender
       t.integer :level
       t.integer :ability_id
       t.string :nature
@@ -13,7 +13,7 @@ class CreateUntrainedMonsters < ActiveRecord::Migration[5.2]
       t.string :move3
       t.string :move4
       t.string :held_item
-      t.string :combat_rules
+      t.integer :combat_rule
       t.string :ball
       t.boolean :is_colored
       t.integer :hp_statistics

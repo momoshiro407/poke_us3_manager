@@ -21,6 +21,8 @@ gem 'bootstrap-will_paginate'
 gem 'ransack'
 gem 'rack-mini-profiler'
 gem 'font-awesome-rails'
+gem 'enum_help'
+gem 'rails-i18n', '~> 5.1'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

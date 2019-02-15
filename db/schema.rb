@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_20_062929) do
+ActiveRecord::Schema.define(version: 2019_02_12_135140) do
 
   create_table "abilities", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "ability_name", null: false
@@ -47,10 +47,17 @@ ActiveRecord::Schema.define(version: 2019_01_20_062929) do
     t.index ["species_id"], name: "index_base_statuses_on_species_id"
   end
 
+  create_table "codes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "gender", limit: 1, default: 0
+    t.integer "combat_rule", limit: 1, default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "monsters", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "species_group_id"
     t.string "nickname"
-    t.string "gender"
+    t.integer "gender"
     t.integer "level"
     t.integer "ability_id"
     t.string "nature"
@@ -60,7 +67,7 @@ ActiveRecord::Schema.define(version: 2019_01_20_062929) do
     t.string "move3"
     t.string "move4"
     t.string "held_item"
-    t.string "combat_rules"
+    t.integer "combat_rule"
     t.string "ball"
     t.boolean "is_colored"
     t.integer "hp_statistics"
@@ -115,7 +122,7 @@ ActiveRecord::Schema.define(version: 2019_01_20_062929) do
   create_table "untrained_monsters", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "species_group_id"
     t.string "nickname"
-    t.string "gender"
+    t.integer "gender"
     t.integer "level"
     t.integer "ability_id"
     t.string "nature"
@@ -125,7 +132,7 @@ ActiveRecord::Schema.define(version: 2019_01_20_062929) do
     t.string "move3"
     t.string "move4"
     t.string "held_item"
-    t.string "combat_rules"
+    t.integer "combat_rule"
     t.string "ball"
     t.boolean "is_colored"
     t.integer "hp_statistics"

@@ -1,0 +1,12 @@
+ja:
+  enums:
+    code:
+      gender:
+        male: オス
+        female: メス
+        unknown: 性別不明
+      combat_rule:
+        single: シングルバトル
+        double: ダブルバトル
+        multi: マルチバトル
+        battle_royal: バトルロイヤル

@@ -53,7 +53,7 @@
       <% @monsters.each do |monster| %>
         <tr id="monster-<%= monster.id %>">
           <td><%= link_to monster.nickname, monster_path(monster), {class: 'link'} %></td>
-          <td><%= monster.gender %></td>
+          <td><%= get_enum_key_by_number(:gender, monster.gender) %></td>
           <td><%= Ability.find(monster.ability_id).ability_name %></td>
           <td><%= monster.nature %></td>
           <td><%= monster.move1 %></td>
