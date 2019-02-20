@@ -13416,7 +13416,7 @@
     "isMegaEvolution": false,
     "evolutions": [],
     "types": ["みず", "あく"],
-    "abilities": ["げきりゅう", "きずなへんげ"],
+    "abilities": ["げきりゅう"],
     "hiddenAbilities": ["へんげんじざい"],
     "stats": {
       "hp": 72,
@@ -15828,7 +15828,7 @@
     "isMegaEvolution": false,
     "evolutions": [],
     "types": ["ノーマル"],
-    "abilities": ["ARシステム"],
+    "abilities": ["ＡＲシステム"],
     "hiddenAbilities": [],
     "stats": {
       "hp": 95,
@@ -16381,8 +16381,8 @@
   },
   {
     "no": 800,
-    "name": "ネクロズマ",
-    "form": "ウルトラネクロズマ",
+    "name": "ウルトラネクロズマ",
+    "form": "",
     "isMegaEvolution": true,
     "evolutions": [],
     "types": ["エスパー"],

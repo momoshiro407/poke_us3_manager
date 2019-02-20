@@ -17,7 +17,7 @@
       </div>
       <div id="collapse1" class="panel-collapse collapse">
         <div class="panel-body">
-          <%= render 'search_form' %>
+          <%= render 'search_form', species: @species_group.species_number %>
         </div>
       </div>
     </div>
@@ -56,9 +56,9 @@
         <% @untrained_monsters.each do |untrained_monster| %>
           <tr id="monster-<%= untrained_monster.id %>">
             <td><%= link_to untrained_monster.nickname, untrained_monster_path(untrained_monster), {class: 'link'} %></td>
-            <td><%= untrained_monster.gender %></td>
-            <td><%= untrained_monster.ability %></td>
-            <td><%= untrained_monster.nature %></td>
+            <td><%= get_enum_key_by_number(:gender, untrained_monster.gender) %></td>
+            <td><%= Ability.find(untrained_monster.ability_id).ability_name %></td>
+            <td><%= Nature.find(untrained_monster.nature_id).name %></td>
             <td><%= untrained_monster.move1 %></td>
             <td><%= untrained_monster.move2 %></td>
             <td><%= untrained_monster.move3 %></td>

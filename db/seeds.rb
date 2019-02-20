@@ -1,3 +1,6 @@
+require "net/http"
+require "uri"
+
 # User.create!(name: 'Example User', email: 'example@gmail.com', password: 'testpass', password_confirmation: 'testpass')
 #
 # 99.times do |n|
@@ -32,9 +35,6 @@ p "#{Type.all.size}種類のタイプデータを登録しました。"
 
 
 ### json形式の特性データをDBに投入する ###
-require "net/http"
-require "uri"
-
 Ability.transaction do
   (1..232).each do |index|
     uri = URI.parse("https://pokeapi.co/api/v2/ability/#{index}")
@@ -99,3 +99,47 @@ ActiveRecord::Base.transaction do
 end
 p "#{BaseStatus.all.size - base_statuses_before_exec}件の種族データを登録しました。"
 
+
+
+## json形式の性格データをDBに投入する ###
+Nature.transaction do
+  (1..25).each do |index|
+    uri = URI.parse("https://pokeapi.co/api/v2/nature/#{index}")
+    json = Net::HTTP.get(uri)
+    data = JSON.parse(json)
+
+    corrected_statuses = []
+    [data['increased_stat'], data['decreased_stat']].each_with_index do |stat, index|
+      if stat.nil?
+        corrected_statuses[index] = 0
+      else
+        case stat['name']
+        when 'attack'
+          corrected_statuses[index] = 1
+        when 'defense'
+          corrected_statuses[index] = 2
+        when 'special-attack'
+          corrected_statuses[index] = 3
+        when 'special-defense'
+          corrected_statuses[index] = 4
+        when 'speed'
+          corrected_statuses[index] = 5
+        end
+      end
+    end
+
+    Nature.create(id: index, name: data['names'][0]['name'], up_status: corrected_statuses[0], down_status: corrected_statuses[1])
+  end
+end
+p "#{Nature.all.size}種類の性格データを登録しました。"
+
+
+
+### json形式の個性データをDBに投入する ###
+json = ActiveSupport::JSON.decode(File.read(Rails.root.join('db', 'json', 'characteristic_data.json')))
+Characteristic.transaction do
+  json.each do |data|
+    Characteristic.create(id: data['no'], name: data['name'])
+  end
+end
+p "#{Characteristic.all.size}種類の個性データを登録しました。"

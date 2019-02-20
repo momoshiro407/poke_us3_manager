@@ -6,31 +6,44 @@
   </div>
   <div class="form-group">
     <%= f.label :gender %>
-    <%= f.text_field :gender, class: 'form-control' %>
+    <%= f.select :gender, options_for_select(get_enum_array(:gender), get_enum_value_by_number(:gender, @monster.gender)), {class: 'form-control', include_blank: '選択してください'} %>
   </div>
   <div class="form-group">
     <%= f.label :level %>
     <%= f.text_field :level, class: 'form-control' %>
   </div>
+  <% if @species.is_mega_evolution %>
+    <% # TODO: メガストーン必須なので持ち物フォームと連動してチェックする %>
+    <div class="form-group">
+      <%= f.label :base_status_id %>
+      <%= f.collection_select :base_status_id, BaseStatus.where(species_id: @species.id), :id, :form_name %>
+    </div>
+  <% end %>
+  <% if @species.is_form_change %>
+    <div class="form-group">
+      <%= f.label :base_status_id %>
+      <%= f.collection_select :base_status_id, BaseStatus.where(species_id: @species.id), :id, :form_name %>
+    </div>
+  <% end %>
   <div class="form-group">
-    <%= f.label :ability %>
-    <%= f.text_field :ability, class: 'form-control' %>
+    <%= f.label :ability_id %>
+    <%= f.collection_select :ability_id, @abilities, :id, :ability_name %>
   </div>
   <div class="form-group">
-    <%= f.label :nature %>
-    <%= f.text_field :nature, class: 'form-control' %>
+    <%= f.label :nature_id %>
+    <%= f.collection_select :nature_id, Nature.all, :id, :name, {class: 'form-control', include_blank: '選択してください'} %>
   </div>
   <div class="form-group">
-    <%= f.label :characteristic %>
-    <%= f.text_field :characteristic, class: 'form-control' %>
+    <%= f.label :characteristic_id %>
+    <%= f.collection_select :characteristic_id, Characteristic.all, :id, :name, {class: 'form-control', include_blank: '選択してください'} %>
   </div>
   <div class="form-group">
     <%= f.label :held_item %>
     <%= f.text_field :held_item, class: 'form-control' %>
   </div>
   <div class="form-group">
-    <%= f.label :combat_rules %>
-    <%= f.text_field :combat_rules, class: 'form-control' %>
+    <%= f.label :combat_rule %>
+    <%= f.select :combat_rule, options_for_select(get_enum_array(:combat_rule), get_enum_value_by_number(:combat_rule, @monster.combat_rule)), {class: 'form-control', include_blank: '選択してください'} %>
   </div>
   <div class="form-group">
     <%= f.label :is_colored %>
@@ -152,3 +165,13 @@
   </div>
 </div>
 
+<script>
+    $(function () {
+        $('#monster_base_status_id').change(function () {
+            $.get({
+                url: '/change_abilities_select',
+                data: {base_status_id: $('#monster_base_status_id').has('option:selected').val()}
+            });
+        });
+    });
+</script>

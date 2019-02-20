@@ -1,0 +1,1 @@
+$('#monster_ability_id').html('<%= j(options_for_select(@abilities.pluck(:ability_name, :id), include_blank: true)) %>');

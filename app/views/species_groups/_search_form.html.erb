@@ -1,27 +1,27 @@
 <%= form_tag(controller.action_name == 'trained_area' ? species_group_monster_path : species_group_untrained_monster_path, method: 'get') do %>
   <div class="form-group">
     <%= label_tag :nickname, 'ニックネーム' %>
-    <%= text_field_tag :nickname, params[:nickname], {class: 'form-control', style: 'width: 20%;'} %>
+    <%= text_field_tag :nickname, '', {class: 'form-control', style: 'width: 20%;'} %>
   </div>
   <div class="form-group">
     <%= label_tag :gender, '性別' %>
-    <%= text_field_tag :gender, params[:gender], {class: 'form-control', style: 'width: 5%;'} %>
+    <%= select_tag :gender, options_for_select(get_enum_array(:gender)), {style: 'width: 5%;', include_blank: true} %>
   </div>
   <div class="form-group">
     <%= label_tag :ability, '特性' %>
-    <%= text_field_tag :ability, params[:ability], {class: 'form-control', style: 'width: 20%;'} %>
+    <%= select_tag :ability_id, options_for_select(get_all_abilities_of_species(species)), {style: 'width: 20%;', include_blank: true} %>
   </div>
   <div class="form-group">
     <%= label_tag :nature, '性格' %>
-    <%= text_field_tag :nature, params[:nature], {class: 'form-control', style: 'width: 20%;'} %>
+    <%= select_tag :nature_id, options_for_select(Nature.pluck(:name, :id)), {style: 'width: 20%;', include_blank: true} %>
   </div>
   <div class="form-group">
     <%= label_tag :move1, '技' %>
     <div class="row">
-      <%= text_field_tag :move1, params[:move1], {class: 'search-move form-control col-md-3', placeholder: '技1つ目'} %>
-      <%= text_field_tag :move2, params[:move2], {class: 'search-move form-control col-md-3', placeholder: '技2つ目'} %>
-      <%= text_field_tag :move3, params[:move3], {class: 'search-move form-control col-md-3', placeholder: '技3つ目'} %>
-      <%= text_field_tag :move4, params[:move4], {class: 'search-move form-control col-md-3', placeholder: '技4つ目'} %>
+      <%= text_field_tag :move1, '', {class: 'search-move form-control col-md-3', placeholder: '技1つ目'} %>
+      <%= text_field_tag :move2, '', {class: 'search-move form-control col-md-3', placeholder: '技2つ目'} %>
+      <%= text_field_tag :move3, '', {class: 'search-move form-control col-md-3', placeholder: '技3つ目'} %>
+      <%= text_field_tag :move4, '', {class: 'search-move form-control col-md-3', placeholder: '技4つ目'} %>
     </div>
   </div>
   <div class="form-group submit">

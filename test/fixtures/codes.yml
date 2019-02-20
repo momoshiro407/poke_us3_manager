@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  gender: 1
+  combat_rule: 1
+
+two:
+  gender: 1
+  combat_rule: 1

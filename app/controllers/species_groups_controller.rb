@@ -25,8 +25,8 @@ class SpeciesGroupsController < ApplicationController
     results = Monster.with_species_group(params[:species_group_id])
     results = params[:nickname].present? ? results.search_nickname(params[:nickname]) : results
     results = params[:gender].present? ? results.search_gender(params[:gender]) : results
-    results = params[:ability].present? ? results.search_ability(params[:ability]) : results
-    results = params[:nature].present? ? results.search_nature(params[:nature]) : results
+    results = params[:ability_id].present? ? results.search_ability(params[:ability_id]) : results
+    results = params[:nature_id].present? ? results.search_nature(params[:nature_id]) : results
     moves = set_move_array(params)
     moves.each do |move|
       results = move.present? ? results.search_move(move) : results
@@ -40,8 +40,8 @@ class SpeciesGroupsController < ApplicationController
     results = UntrainedMonster.with_species_group(params[:species_group_id])
     results = params[:nickname].present? ? results.search_nickname(params[:nickname]) : results
     results = params[:gender].present? ? results.search_gender(params[:gender]) : results
-    results = params[:ability].present? ? results.search_ability(params[:ability]) : results
-    results = params[:nature].present? ? results.search_nature(params[:nature]) : results
+    results = params[:ability_id].present? ? results.search_ability(params[:ability_id]) : results
+    results = params[:nature_id].present? ? results.search_nature(params[:nature_id]) : results
     moves = set_move_array(params)
     moves.each do |move|
       results = move.present? ? results.search_move(move) : results
@@ -94,7 +94,7 @@ class SpeciesGroupsController < ApplicationController
   end
 
   def search_params
-    params.require(:monsters).permit(:nickname, :gender, :ability, :nature, :move1, :move2, :move3, :move4)
+    params.require(:monsters).permit(:nickname, :gender, :ability_id, :nature_id, :move1, :move2, :move3, :move4)
   end
 
   def set_move_array(params)

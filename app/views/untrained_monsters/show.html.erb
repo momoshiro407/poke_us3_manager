@@ -14,12 +14,12 @@
     </tr>
     <tr>
       <td><%= @untrained_monster.level %></td>
-      <td><%= @untrained_monster.gender %></td>
-      <td><%= @untrained_monster.nature %></td>
-      <td><%= @untrained_monster.characteristic %></td>
-      <td><%= @untrained_monster.ability %></td>
+      <td><%= get_enum_key_by_number(:gender, @untrained_monster.gender) %></td>
+      <td><%= Nature.find(@monster.nature_id).name %></td>
+      <td><%= Characteristic.find_by(id: @monster.characteristic_id).try(:name) %></td>
+      <td><%= Ability.find(@untrained_monster.ability_id).ability_name %></td>
       <td><%= @untrained_monster.held_item %></td>
-      <td><%= @untrained_monster.combat_rules %></td>
+      <td><%= get_enum_key_by_number(:combat_rule, @untrained_monster.combat_rule) %></td>
     </tr>
   </table>
 </div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_18_142711) do
+ActiveRecord::Schema.define(version: 2019_02_15_153822) do
 
   create_table "abilities", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "ability_name", null: false
@@ -47,20 +47,33 @@ ActiveRecord::Schema.define(version: 2019_01_18_142711) do
     t.index ["species_id"], name: "index_base_statuses_on_species_id"
   end
 
+  create_table "characteristics", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "codes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "gender", limit: 1, default: 0
+    t.integer "combat_rule", limit: 1, default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "monsters", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "species_group_id"
     t.string "nickname"
-    t.string "gender"
+    t.integer "gender"
     t.integer "level"
-    t.string "ability"
-    t.string "nature"
-    t.string "characteristic"
+    t.integer "ability_id"
+    t.integer "nature_id"
+    t.integer "characteristic_id"
     t.string "move1"
     t.string "move2"
     t.string "move3"
     t.string "move4"
     t.string "held_item"
-    t.string "combat_rules"
+    t.integer "combat_rule"
     t.string "ball"
     t.boolean "is_colored"
     t.integer "hp_statistics"
@@ -84,7 +97,16 @@ ActiveRecord::Schema.define(version: 2019_01_18_142711) do
     t.text "memo"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "base_status_id"
     t.index ["species_group_id"], name: "index_monsters_on_species_group_id"
+  end
+
+  create_table "natures", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.integer "up_status"
+    t.integer "down_status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "species", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -114,17 +136,17 @@ ActiveRecord::Schema.define(version: 2019_01_18_142711) do
   create_table "untrained_monsters", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "species_group_id"
     t.string "nickname"
-    t.string "gender"
+    t.integer "gender"
     t.integer "level"
-    t.string "ability"
-    t.string "nature"
-    t.string "characteristic"
+    t.integer "ability_id"
+    t.integer "nature_id"
+    t.integer "characteristic_id"
     t.string "move1"
     t.string "move2"
     t.string "move3"
     t.string "move4"
     t.string "held_item"
-    t.string "combat_rules"
+    t.integer "combat_rule"
     t.string "ball"
     t.boolean "is_colored"
     t.integer "hp_statistics"
@@ -148,6 +170,7 @@ ActiveRecord::Schema.define(version: 2019_01_18_142711) do
     t.text "memo"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "base_status_id"
     t.index ["species_group_id"], name: "index_untrained_monsters_on_species_group_id"
   end
 
