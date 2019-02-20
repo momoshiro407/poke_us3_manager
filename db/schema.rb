@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_12_135140) do
+ActiveRecord::Schema.define(version: 2019_02_15_153822) do
 
   create_table "abilities", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "ability_name", null: false
@@ -47,6 +47,12 @@ ActiveRecord::Schema.define(version: 2019_02_12_135140) do
     t.index ["species_id"], name: "index_base_statuses_on_species_id"
   end
 
+  create_table "characteristics", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "codes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "gender", limit: 1, default: 0
     t.integer "combat_rule", limit: 1, default: 0
@@ -60,8 +66,8 @@ ActiveRecord::Schema.define(version: 2019_02_12_135140) do
     t.integer "gender"
     t.integer "level"
     t.integer "ability_id"
-    t.string "nature"
-    t.string "characteristic"
+    t.integer "nature_id"
+    t.integer "characteristic_id"
     t.string "move1"
     t.string "move2"
     t.string "move3"
@@ -95,6 +101,14 @@ ActiveRecord::Schema.define(version: 2019_02_12_135140) do
     t.index ["species_group_id"], name: "index_monsters_on_species_group_id"
   end
 
+  create_table "natures", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.integer "up_status"
+    t.integer "down_status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "species", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "number", null: false
     t.string "name", null: false
@@ -125,8 +139,8 @@ ActiveRecord::Schema.define(version: 2019_02_12_135140) do
     t.integer "gender"
     t.integer "level"
     t.integer "ability_id"
-    t.string "nature"
-    t.string "characteristic"
+    t.integer "nature_id"
+    t.integer "characteristic_id"
     t.string "move1"
     t.string "move2"
     t.string "move3"

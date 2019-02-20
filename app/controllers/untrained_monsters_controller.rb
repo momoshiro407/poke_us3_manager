@@ -65,7 +65,7 @@ class UntrainedMonstersController < ApplicationController
   private
 
   def untrained_monster_params
-    params.require(:untrained_monster).permit(:nickname, :gender, :level, :ability_id, :nature, :characteristic,
+    params.require(:untrained_monster).permit(:nickname, :gender, :level, :ability_id, :nature_id, :characteristic_id,
                                     :type1, :type2, :move1, :move2, :move3, :move4, :held_item, :combat_rule,
                                     :is_colored, :hp_statistics, :attack_statistics, :defense_statistics,
                                     :sp_attack_statistics, :sp_defense_statistics, :speed_statistics,

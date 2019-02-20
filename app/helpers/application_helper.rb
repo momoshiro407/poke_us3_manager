@@ -31,4 +31,13 @@ module ApplicationHelper
     end
   end
 
+  def get_all_abilities_of_species(species_id)
+    base_statuses_abilities = BaseStatusAbility.joins(base_status: :species).where("species.id = ?", species_id)
+    abilities = []
+    base_statuses_abilities.each do |base_statuses_ability|
+      ability = Ability.find(base_statuses_ability.ability_id)
+      abilities << [ability.ability_name, ability.id]
+    end
+    return abilities
+  end
 end
