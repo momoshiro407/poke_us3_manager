@@ -18,4 +18,6 @@ Rails.application.routes.draw do
   get 'monsters_search', to: 'monsters#search'
   get 'change_abilities_select', to: 'monsters#change_abilities_select'
   get 'change_abilities_select_untrained', to: 'untrained_monsters#change_abilities_select_untrained'
+  get 'set_calculated_status', to: 'monsters#set_calculated_status'
+  get 'set_calculated_status_untrained', to: 'untrained_monsters#set_calculated_status_untrained'
 end
