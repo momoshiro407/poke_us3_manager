@@ -1,6 +1,7 @@
 <!--メガ進化する種族の場合は、メガ進化後のステータスも表示されるようにする -->
 <div>
   <p><%= @monster.nickname %></p><%= p '★' if @monster.is_colored %>
+  <p><%= BaseStatus.find(@monster.base_status_id).form_name || @monster.species_group.species.name %></p>
 </div>
 <div>
   <table border="1">
@@ -100,6 +101,29 @@
       <td><%= @monster.sp_defense_statistics %></td>
       <td><%= @monster.speed_statistics %></td>
     </tr>
+    <% if @monster.species_group.species.is_mega_evolution %>
+      <tr>
+        <td>ステータス実数値（メガシンカ）</td>
+        <td><%= @monster.hp_statistics %></td>
+        <td><%= @monster.attack_statistics %></td>
+        <td><%= @monster.defense_statistics %></td>
+        <td><%= @monster.sp_attack_statistics %></td>
+        <td><%= @monster.sp_defense_statistics %></td>
+        <td><%= @monster.speed_statistics %></td>
+      </tr>
+    <% end %>
+    <% if @monster.species_group.species.is_form_change %>
+      <tr>
+        戦闘中に
+        <td>ステータス実数値（フォルムチェンジ）</td>
+        <td><%= @monster.hp_statistics %></td>
+        <td><%= @monster.attack_statistics %></td>
+        <td><%= @monster.defense_statistics %></td>
+        <td><%= @monster.sp_attack_statistics %></td>
+        <td><%= @monster.sp_defense_statistics %></td>
+        <td><%= @monster.speed_statistics %></td>
+      </tr>
+    <% end %>
   </table>
 </div>
 <br>

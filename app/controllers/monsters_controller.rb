@@ -6,7 +6,7 @@ class MonstersController < ApplicationController
 
   def new
     @monster = Monster.new
-    @species = Species.find_by(number: SpeciesGroup.find(params[:species_group_id]).species_number)
+    @species = Species.find_by(number: SpeciesGroup.find(params[:species_group_id]).species)
     base_status = BaseStatus.find_by(species_id: @species.id)
     base_status_abilities = BaseStatusAbility.where(base_status_id: base_status.id)
     @abilities = get_abilities(base_status_abilities)
@@ -15,7 +15,7 @@ class MonstersController < ApplicationController
   def create
     species_group = SpeciesGroup.find(params[:species_group_id])
     create_params = monster_params
-    create_params['base_status_id'] ||= BaseStatus.find_by(species_id: Species.find_by(number: species_group.species_number).id).id
+    create_params['base_status_id'] ||= BaseStatus.find_by(species_id: species_group.species.id).id
     @monster = species_group.monsters.build(create_params)
     if @monster.save
       log_in @monster.species_group.user
@@ -29,7 +29,7 @@ class MonstersController < ApplicationController
 
   def edit
     @monster = Monster.find(params[:id])
-    @species = Species.find_by(number: @monster.species_group.species_number)
+    @species = Species.find_by(number: @monster.species_group.species)
     base_status_abilities = BaseStatusAbility.where(base_status_id: @monster.base_status_id)
     @abilities = get_abilities(base_status_abilities)
   end

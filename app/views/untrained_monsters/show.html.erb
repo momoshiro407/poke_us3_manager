@@ -1,5 +1,6 @@
 <div>
   <p><%= @untrained_monster.nickname %></p><%= p '★' if @untrained_monster.is_colored %>
+  <p><%= BaseStatus.find(@untrained_monster.base_status_id).form_name || @untrained_monster.species_group.species.name %></p>
 </div>
 <div>
   <table border="1">

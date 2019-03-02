@@ -6,7 +6,7 @@ class UntrainedMonstersController < ApplicationController
 
   def new
     @untrained_monster = UntrainedMonster.new
-    @species = Species.find_by(number: SpeciesGroup.find(params[:species_group_id]).species_number)
+    @species = Species.find_by(number: SpeciesGroup.find(params[:species_group_id]).species)
     base_status = BaseStatus.find_by(species_id: @species.id)
     base_status_abilities = BaseStatusAbility.where(base_status_id: base_status.id)
     @abilities = get_abilities(base_status_abilities)
@@ -15,9 +15,9 @@ class UntrainedMonstersController < ApplicationController
   def create
     species_group = SpeciesGroup.find(params[:species_group_id])
     create_params = untrained_monster_params
-    create_params['base_status_id'] ||= BaseStatus.find_by(species_id: Species.find_by(number: species_group.species_number).id).id
+    create_params['base_status_id'] ||= BaseStatus.find_by(species_id: species_group.id).id
     @untrained_monster = species_group.untrained_monsters.build(create_params)
-    @untrained_monster.nickname = species_group.species_name if @untrained_monster.nickname.blank?
+    @untrained_monster.nickname = species_group.species.name if @untrained_monster.nickname.blank?
     if @untrained_monster.save
       log_in @untrained_monster.species_group.user
       flash[:success] = '育成予定ポケモンを作成しました'
@@ -30,7 +30,7 @@ class UntrainedMonstersController < ApplicationController
 
   def edit
     @untrained_monster = UntrainedMonster.find(params[:id])
-    @species = Species.find_by(number: @untrained_monster.species_group.species_number)
+    @species = Species.find_by(number: @untrained_monster.species_group.species)
     base_status_abilities = BaseStatusAbility.where(base_status_id: @untrained_monster.base_status_id)
     @abilities = get_abilities(base_status_abilities)
   end

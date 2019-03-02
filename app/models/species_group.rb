@@ -5,5 +5,5 @@ class SpeciesGroup < ApplicationRecord
   has_many :untrained_monsters
 
   validates :user_id, presence: true
-  validates :species_number, :species_name, presence: true
+  validates :species_id, presence: true
 end

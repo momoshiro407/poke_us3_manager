@@ -1,6 +1,6 @@
-<h1><%= @species_group.species_name %>統一</h1>
+<h1><%= @species_group.species.name %>統一</h1>
 <div>
-  <p>No.<%= @species_group.species_number %> - <%= @species_group.species_name %></p>
+  <p>No.<%= @species_group.species.number %> - <%= @species_group.species.name %></p>
 </div>
 <div>
   <p>
@@ -17,7 +17,7 @@
       </div>
       <div id="collapse1" class="panel-collapse collapse">
         <div class="panel-body">
-          <%= render 'search_form', species: @species_group.species_number %>
+          <%= render 'search_form', species: @species_group.species.number %>
         </div>
       </div>
     </div>
@@ -26,7 +26,7 @@
     <p>該当するポケモンがいません！</p>
   <% else %>
     <table class="col-md-12">
-      <caption>育成済み<%= @species_group.species_name %>一覧</caption>
+      <caption>育成済み<%= @species_group.species.name %>一覧</caption>
       <colgroup style="width: 10%;"> <!-- ニックネーム -->
       <colgroup style="width: 5%;"> <!-- 性別 -->
       <colgroup style="width: 10%;"> <!-- 特性 -->
