@@ -15,8 +15,8 @@
     <tr>
       <td><%= @untrained_monster.level %></td>
       <td><%= get_enum_key_by_number(:gender, @untrained_monster.gender) %></td>
-      <td><%= Nature.find(@monster.nature_id).name %></td>
-      <td><%= Characteristic.find_by(id: @monster.characteristic_id).try(:name) %></td>
+      <td><%= Nature.find(@untrained_monster.nature_id).name %></td>
+      <td><%= Characteristic.find_by(id: @untrained_monster.characteristic_id).try(:name) %></td>
       <td><%= Ability.find(@untrained_monster.ability_id).ability_name %></td>
       <td><%= @untrained_monster.held_item %></td>
       <td><%= get_enum_key_by_number(:combat_rule, @untrained_monster.combat_rule) %></td>

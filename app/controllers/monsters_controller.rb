@@ -1,4 +1,6 @@
 class MonstersController < ApplicationController
+  include StatusCalculater
+
   before_action :logged_in_user, only: [:new, :create, :edit, :update]
   before_action :correct_user_monster, only: [:show, :destroy]
 
@@ -57,6 +59,10 @@ class MonstersController < ApplicationController
   def change_abilities_select
     base_status_abilities = BaseStatusAbility.where(base_status_id: params[:base_status_id])
     @abilities = get_abilities(base_status_abilities)
+  end
+
+  def set_calculated_status
+    @statuses = status_calculate(params)
   end
 
   private

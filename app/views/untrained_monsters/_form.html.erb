@@ -74,9 +74,6 @@
 
 <div class="value-property">
   ステータス
-  <div class="form-group">
-    <%= check_box_tag :is_caliculate %>入力した個体値と努力値からステータスを自動計算する<br>
-  </div>
   個体値
   <div class="form-group">
     <%= f.label :hp_individual %>
@@ -130,6 +127,9 @@
     <%= f.text_field :speed_effort, class: 'form-control' %>
   </div>
 </div>
+<div class="btn cal-btn">
+  ステータス自動計算
+</div>
 <div>
   ステータス
   <div class="form-group">
@@ -166,12 +166,41 @@
   </div>
 </div>
 
+<!--jQueryに種族値（フォルムチェンジ等でない）を引き渡すための非表示inputエリア-->
+<input id="base_status" type="hidden" value="<%= BaseStatus.find_by(species_id: @species.number).id %>">
+
 <script>
     $(function () {
+      // フォルムフォーム切り替え時の処理
         $('#untrained_monster_base_status_id').change(function () {
             $.get({
                 url: '/change_abilities_select_untrained',
                 data: {base_status_id: $('#untrained_monster_base_status_id').has('option:selected').val()}
+            });
+        });
+
+      // ステータス自動計算用の各値を取得する処理
+        $('.cal-btn').click(function () {
+            let base_status_id = $('#untrained_monster_base_status_id').has('option:selected').val() || $('#base_status').val();
+
+            let individuals = $('input[id$="_individual"]').map(function () {
+                return $(this).val();
+            }).get();
+
+            let efforts = $('input[id$="_effort"]').map(function () {
+                return $(this).val();
+            }).get();
+
+            let level = $('input[id="untrained_monster_level"]').val();
+
+            let nature_id = $('[name="untrained_monster[nature_id]"]').has('option:selected').val();
+
+            $.get({
+                url: '/set_calculated_status_untrained',
+                data: {
+                    base_status_id: base_status_id, individuals: individuals, efforts: efforts,
+                    level: level, nature_id: nature_id
+                }
             });
         });
     });

@@ -1,4 +1,6 @@
 class UntrainedMonstersController < ApplicationController
+  include StatusCalculater
+
   before_action :logged_in_user, only: [:new, :create]
   before_action :correct_user_untrained_monster, only: [:show, :destroy]
 
@@ -60,6 +62,10 @@ class UntrainedMonstersController < ApplicationController
   def change_abilities_select_untrained
     base_status_abilities = BaseStatusAbility.where(base_status_id: params[:base_status_id])
     @abilities = get_abilities(base_status_abilities)
+  end
+
+  def set_calculated_status_untrained
+    @statuses = status_calculate(params)
   end
 
   private
