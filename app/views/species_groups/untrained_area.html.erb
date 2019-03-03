@@ -56,8 +56,8 @@
           <tr id="monster-<%= untrained_monster.id %>">
             <td><%= link_to untrained_monster.nickname, untrained_monster_path(untrained_monster), {class: 'link'} %></td>
             <td><%= get_enum_key_by_number(:gender, untrained_monster.gender) %></td>
-            <td><%= Ability.find(untrained_monster.ability_id).ability_name %></td>
-            <td><%= Nature.find(untrained_monster.nature_id).name %></td>
+            <td><%= Ability.find_by(id: untrained_monster.ability_id).try(:ability_name) %></td>
+            <td><%= Nature.find_by(id: untrained_monster.nature_id).try(:name) %></td>
             <td><%= untrained_monster.move1 %></td>
             <td><%= untrained_monster.move2 %></td>
             <td><%= untrained_monster.move3 %></td>

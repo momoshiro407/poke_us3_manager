@@ -29,7 +29,7 @@ class MonstersController < ApplicationController
 
   def edit
     @monster = Monster.find(params[:id])
-    @species = Species.find_by(number: @monster.species_group.species)
+    @species = Species.find_by(number: @monster.species)
     base_status_abilities = BaseStatusAbility.where(base_status_id: @monster.base_status_id)
     @abilities = get_abilities(base_status_abilities)
   end
@@ -47,6 +47,9 @@ class MonstersController < ApplicationController
 
   def show
     @monster = Monster.find(params[:id])
+    @base_status = BaseStatus.find(@monster.base_status_id)
+    @base_status_mega = BaseStatus.where(species_id: @base_status.species_id, form_kind: 1)
+    @types =  @base_status.types.map {|type| type}
   end
 
   def destroy

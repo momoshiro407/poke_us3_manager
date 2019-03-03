@@ -16385,7 +16385,7 @@
     "form": "",
     "isMegaEvolution": true,
     "evolutions": [],
-    "types": ["エスパー"],
+    "types": ["エスパー", "ドラゴン"],
     "abilities": ["ブレインフォース"],
     "hiddenAbilities": [],
     "stats": {

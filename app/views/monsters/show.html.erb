@@ -1,10 +1,27 @@
 <!--メガ進化する種族の場合は、メガ進化後のステータスも表示されるようにする -->
 <div>
   <p><%= @monster.nickname %></p><%= p '★' if @monster.is_colored %>
-  <p><%= BaseStatus.find(@monster.base_status_id).form_name || @monster.species_group.species.name %></p>
+  <div class="species-info">
+    <p class="species-name"><%= @base_status.form_name || @monster.species.name %></p>
+    <% @types.each do |type| %>
+      <p class="type-area-<%= type.id %>"><%= type.type_name %></p>
+    <% end %>
+  </div>
+  <% if @monster.species.is_mega_evolution %>
+<!--    # TODO: 登録時に持ち物をメガストーンにした場合のみ追加でタイプを表示する-->
+    <% @base_status_mega.each do |base_status_mega| %>
+      <div class="species-info">
+        <p class="species-name"><%= base_status_mega.form_name %></p>
+<!--        # TODO: n+1問題が発生-->
+        <% base_status_mega.types.each do |type| %>
+          <p class="type-area-<%= type.id %>"><%= type.type_name %></p>
+        <% end %>
+      </div>
+    <% end %>
+  <% end %>
 </div>
-<div>
-  <table border="1">
+<div class="basic-info">
+  <table border="2">
     <tr>
       <th>レベル</th>
       <th>性別</th>
@@ -17,18 +34,18 @@
     <tr>
       <td><%= @monster.level %></td>
       <td><%= get_enum_key_by_number(:gender, @monster.gender) %></td>
-      <td><%= Nature.find(@monster.nature_id).name %></td>
+      <td><%= Nature.find_by(id: @monster.nature_id).try(:name) %></td>
       <td><%= Characteristic.find_by(id: @monster.characteristic_id).try(:name) %></td>
-      <td><%= Ability.find(@monster.ability_id).ability_name %></td>
+      <td><%= Ability.find_by(id: @monster.ability_id).try(:ability_name) %></td>
       <td><%= @monster.held_item %></td>
       <td><%= get_enum_key_by_number(:combat_rule, @monster.combat_rule) %></td>
     </tr>
   </table>
 </div>
 <br>
-<div>
+<div class="move-info">
   覚えている技
-  <table border="1">
+  <table border="2">
     <tr>
       <th>技名</th>
       <th>タイプ</th>
@@ -62,9 +79,9 @@
   </table>
 </div>
 <br>
-<div>
+<div class="status-info">
   ステータス
-  <table border="1">
+  <table border="2">
     <tr>
       <th></th>
       <th>HP</th>
@@ -101,21 +118,24 @@
       <td><%= @monster.sp_defense_statistics %></td>
       <td><%= @monster.speed_statistics %></td>
     </tr>
-    <% if @monster.species_group.species.is_mega_evolution %>
-      <tr>
-        <td>ステータス実数値（メガシンカ）</td>
-        <td><%= @monster.hp_statistics %></td>
-        <td><%= @monster.attack_statistics %></td>
-        <td><%= @monster.defense_statistics %></td>
-        <td><%= @monster.sp_attack_statistics %></td>
-        <td><%= @monster.sp_defense_statistics %></td>
-        <td><%= @monster.speed_statistics %></td>
-      </tr>
+    <% if @monster.species.is_mega_evolution %>
+      <% @base_status_mega.each do |base_status_mega| %>
+        <!--        # TODO: 登録時に持ち物をメガストーンにした場合のみ追加でステータスを表示する-->
+        <tr>
+          <td>ステータス実数値（メガシンカ）</td>
+          <td><%= @monster.hp_statistics %></td>
+          <td><%= @monster.attack_statistics %></td>
+          <td><%= @monster.defense_statistics %></td>
+          <td><%= @monster.sp_attack_statistics %></td>
+          <td><%= @monster.sp_defense_statistics %></td>
+          <td><%= @monster.speed_statistics %></td>
+        </tr>
+      <% end %>
     <% end %>
-    <% if @monster.species_group.species.is_form_change %>
+    <% if @monster.species.is_form_change %>
       <tr>
-        戦闘中に
-        <td>ステータス実数値（フォルムチェンジ）</td>
+        <!--        # TODO: 戦闘中にフォルムが変化する種族のみ追加でステータスを表示する（戦闘前からフォルムチェンジしている場合を除く）-->
+        <td>ステータス実数値（戦闘中フォルムチェンジ）</td>
         <td><%= @monster.hp_statistics %></td>
         <td><%= @monster.attack_statistics %></td>
         <td><%= @monster.defense_statistics %></td>
@@ -127,8 +147,8 @@
   </table>
 </div>
 <br>
-<div>
-  <table border="1">
+<div class="memo-info">
+  <table border="2">
     <tr>
       <th>育成メモ</th>
     </tr>

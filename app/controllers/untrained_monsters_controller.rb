@@ -15,7 +15,7 @@ class UntrainedMonstersController < ApplicationController
   def create
     species_group = SpeciesGroup.find(params[:species_group_id])
     create_params = untrained_monster_params
-    create_params['base_status_id'] ||= BaseStatus.find_by(species_id: species_group.id).id
+    create_params['base_status_id'] ||= BaseStatus.find_by(species_id: species_group.species.id).id
     @untrained_monster = species_group.untrained_monsters.build(create_params)
     @untrained_monster.nickname = species_group.species.name if @untrained_monster.nickname.blank?
     if @untrained_monster.save
@@ -30,7 +30,7 @@ class UntrainedMonstersController < ApplicationController
 
   def edit
     @untrained_monster = UntrainedMonster.find(params[:id])
-    @species = Species.find_by(number: @untrained_monster.species_group.species)
+    @species = Species.find_by(number: @untrained_monster.species)
     base_status_abilities = BaseStatusAbility.where(base_status_id: @untrained_monster.base_status_id)
     @abilities = get_abilities(base_status_abilities)
   end
@@ -50,6 +50,9 @@ class UntrainedMonstersController < ApplicationController
 
   def show
     @untrained_monster = UntrainedMonster.find(params[:id])
+    @base_status = BaseStatus.find(@untrained_monster.base_status_id)
+    @base_status_mega = BaseStatus.where(species_id: @base_status.species_id, form_kind: 1)
+    @types =  @base_status.types.map {|type| type}
   end
 
   def destroy
