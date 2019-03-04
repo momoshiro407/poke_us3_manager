@@ -1,5 +1,5 @@
 <li id="species_group-<%= species_group.id %>">
-  <span class="species_group"><%= species_group.species_name %></span>
+  <span class="species_group"><%= species_group.species.name %></span>
   <% if current_user?(species_group.user) %>
     <%= link_to '#', {method: :delete, data: {confirm: '削除して宜しいですか？'}, style: 'width: 5%', class: 'link'} do %>
       <%= fa_icon 'trash', class: 'fa fa-green' %>

@@ -277,3 +277,123 @@ caption {
 .submit {
   text-align: center;
 }
+
+/* monster show */
+
+.species-info {
+  overflow: hidden;
+}
+
+.species-info .species-name {
+  float: left;
+  vertical-align: middle;
+  height: 25px;
+  line-height: 25px;
+}
+
+p[class^="type-area"] {
+  float: left;
+  color: #ffffff;
+  border: 1px solid #ffffff;
+  height: 23px;
+  width: 65px;
+  text-align: center;
+  vertical-align: middle;
+  border-radius: 5px;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 1px;
+  margin-left: 4px;
+}
+
+.species-info .type-area-1 {
+  // ノーマル
+  background-color: #B8B795;
+}
+.species-info .type-area-2 {
+  // ほのお
+  background-color: #DC5949;
+}
+.species-info .type-area-3 {
+  // みず
+  background-color: #73B8E9;
+}
+.species-info .type-area-4 {
+  // でんき
+  background-color: #F2D479;
+}
+.species-info .type-area-5 {
+  // くさ
+  background-color: #95C779;
+}
+.species-info .type-area-6 {
+  // こおり
+  background-color: #B8E7E7;
+}
+.species-info .type-area-7 {
+  // かくとう
+  background-color: #87352F;
+}
+.species-info .type-area-8 {
+  // どく
+  background-color: #9B5FA7;
+}
+.species-info .type-area-9 {
+  // じめん
+  background-color: #E3CB8F;
+}
+.species-info .type-area-10 {
+  // ひこう
+  background-color: #B2BCEA;
+}
+.species-info .type-area-11 {
+  // エスパー
+  background-color: #E46B9B;
+}
+.species-info .type-area-12 {
+  // むし
+  background-color: #BDB85F;
+}
+.species-info .type-area-13 {
+  // いわ
+  background-color: #C2A75F;
+}
+.species-info .type-area-14 {
+  // ゴースト
+  background-color: #6C6CA1;
+}
+.species-info .type-area-15 {
+  // ドラゴン
+  background-color: #6687E3;
+}
+.species-info .type-area-16 {
+  // あく
+  background-color: #6C594F;
+}
+.species-info .type-area-17 {
+  // はがね
+  background-color: #C7D4E0;
+}
+.species-info .type-area-18 {
+  // フェアリー
+  background-color: #FA90BA;
+}
+
+.basic-info th, td {
+  text-align: center;
+  padding: 2px 3px;
+}
+
+.move-info th, td {
+  text-align: center;
+  padding: 2px 3px;
+}
+.status-info th, td {
+  text-align: center;
+  padding: 2px 3px;
+}
+.memo-info th, td {
+  text-align: center;
+  padding: 2px 3px;
+}
+
