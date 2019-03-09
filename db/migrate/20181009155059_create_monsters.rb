@@ -12,7 +12,7 @@ class CreateMonsters < ActiveRecord::Migration[5.2]
       t.string :move2
       t.string :move3
       t.string :move4
-      t.string :held_item
+      t.integer :held_item_id
       t.integer :combat_rule
       t.string :ball
       t.boolean :is_colored

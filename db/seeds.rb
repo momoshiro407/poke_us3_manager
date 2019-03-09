@@ -173,7 +173,7 @@ p "#{ItemGroup.all.size}種類の持ち物グループデータを登録しま�
 item_categories_number = [12, 13, 15, 19, 18, 17, 45, 2, 3, 4, 4, 5, 6, 7, 8, 44, 46]
 ActiveRecord::Base.transaction do
   item_categories_number.each_with_index do |item_category, i|
-    next if i == 11 # 「きのみ（相手にダメージ）」は「きのみ（HP・PP回復）」のグループに入っているので読み込み時は飛ばす
+    next if i == 10 # 「きのみ（相手にダメージ）」は「きのみ（HP・PP回復）」のグループに入っているので読み込み時は飛ばす
     item_attribute_uri = URI.parse("https://pokeapi.co/api/v2/item-category/#{item_category}/")
     json = Net::HTTP.get(item_attribute_uri)
     item_attribute_data = JSON.parse(json)
@@ -189,16 +189,11 @@ ActiveRecord::Base.transaction do
   end
 end
   # 一部の持ち物に紐付くitem_groupを変更
-Item.find_by(name: 'フィラのみ').item_name_group.update(item_group_id: 10)
-Item.find_by(name: 'ウイのみ').item_name_group.update(item_group_id: 10)
-Item.find_by(name: 'マゴのみ').item_name_group.update(item_group_id: 10)
-Item.find_by(name: 'バンジのみ').item_name_group.update(item_group_id: 10)
-Item.find_by(name: 'イアのみ').item_name_group.update(item_group_id: 10)
-Item.find_by(name: 'ヒメリのみ').item_name_group.update(item_group_id: 10)
-Item.find_by(name: 'オレンのみ').item_name_group.update(item_group_id: 10)
-Item.find_by(name: 'オボンのみ').item_name_group.update(item_group_id: 10)
-Item.find_by(name: 'ジャポのみ').item_name_group.update(item_group_id: 11)
-Item.find_by(name: 'レンブのみ').item_name_group.update(item_group_id: 11)
-Item.find_by(name: 'アッキのみ').item_name_group.update(item_group_id: 12)
-Item.find_by(name: 'タラプのみ').item_name_group.update(item_group_id: 12)
+Item.find_by(name: 'ヒメリのみ').item_name_groups.update(item_group_id: 10)
+Item.find_by(name: 'オレンのみ').item_name_groups.update(item_group_id: 10)
+Item.find_by(name: 'オボンのみ').item_name_groups.update(item_group_id: 10)
+Item.find_by(name: 'ジャポのみ').item_name_groups.update(item_group_id: 11)
+Item.find_by(name: 'レンブのみ').item_name_groups.update(item_group_id: 11)
+Item.find_by(name: 'アッキのみ').item_name_groups.update(item_group_id: 12)
+Item.find_by(name: 'タラプのみ').item_name_groups.update(item_group_id: 12)
 p "#{Item.all.size}種類の持ち物データを登録しました。"
