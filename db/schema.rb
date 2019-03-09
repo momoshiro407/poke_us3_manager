@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_02_143039) do
+ActiveRecord::Schema.define(version: 2019_03_04_141340) do
 
   create_table "abilities", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "ability_name", null: false
@@ -58,6 +58,21 @@ ActiveRecord::Schema.define(version: 2019_03_02_143039) do
     t.integer "combat_rule", limit: 1, default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "item_groups", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name", null: false
+  end
+
+  create_table "item_name_groups", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "item_id"
+    t.bigint "item_group_id"
+    t.index ["item_group_id"], name: "index_item_name_groups_on_item_group_id"
+    t.index ["item_id"], name: "index_item_name_groups_on_item_id"
+  end
+
+  create_table "items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name", null: false
   end
 
   create_table "monsters", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -191,6 +206,8 @@ ActiveRecord::Schema.define(version: 2019_03_02_143039) do
   add_foreign_key "base_status_types", "base_statuses"
   add_foreign_key "base_status_types", "types"
   add_foreign_key "base_statuses", "species"
+  add_foreign_key "item_name_groups", "item_groups"
+  add_foreign_key "item_name_groups", "items"
   add_foreign_key "monsters", "species_groups"
   add_foreign_key "species_groups", "users"
   add_foreign_key "untrained_monsters", "species_groups"
