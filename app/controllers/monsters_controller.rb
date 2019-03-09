@@ -10,6 +10,7 @@ class MonstersController < ApplicationController
     base_status = BaseStatus.find_by(species_id: @species.id)
     base_status_abilities = BaseStatusAbility.where(base_status_id: base_status.id)
     @abilities = get_abilities(base_status_abilities)
+    @item_groups = ItemGroup.all
   end
 
   def create
@@ -32,6 +33,7 @@ class MonstersController < ApplicationController
     @species = Species.find_by(number: @monster.species)
     base_status_abilities = BaseStatusAbility.where(base_status_id: @monster.base_status_id)
     @abilities = get_abilities(base_status_abilities)
+    @item_groups = ItemGroup.all
   end
 
   def update
@@ -72,7 +74,7 @@ class MonstersController < ApplicationController
 
   def monster_params
     params.require(:monster).permit(:nickname, :gender, :level, :ability_id, :nature_id, :characteristic_id,
-                                    :type1, :type2, :move1, :move2, :move3, :move4, :held_item, :combat_rule,
+                                    :type1, :type2, :move1, :move2, :move3, :move4, :held_item_id, :combat_rule,
                                     :is_colored, :hp_statistics, :attack_statistics, :defense_statistics,
                                     :sp_attack_statistics, :sp_defense_statistics, :speed_statistics,
                                     :hp_individual, :attack_individual, :defense_individual, :sp_attack_individual,

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_02_143039) do
+ActiveRecord::Schema.define(version: 2019_03_09_131903) do
 
   create_table "abilities", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "ability_name", null: false
@@ -60,6 +60,21 @@ ActiveRecord::Schema.define(version: 2019_03_02_143039) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "item_groups", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name", null: false
+  end
+
+  create_table "item_name_groups", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "item_id"
+    t.bigint "item_group_id"
+    t.index ["item_group_id"], name: "index_item_name_groups_on_item_group_id"
+    t.index ["item_id"], name: "index_item_name_groups_on_item_id"
+  end
+
+  create_table "items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name", null: false
+  end
+
   create_table "monsters", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "species_group_id"
     t.string "nickname"
@@ -72,7 +87,7 @@ ActiveRecord::Schema.define(version: 2019_03_02_143039) do
     t.string "move2"
     t.string "move3"
     t.string "move4"
-    t.string "held_item"
+    t.integer "held_item_id"
     t.integer "combat_rule"
     t.string "ball"
     t.boolean "is_colored"
@@ -120,8 +135,6 @@ ActiveRecord::Schema.define(version: 2019_03_02_143039) do
 
   create_table "species_groups", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id"
-    t.integer "species_number", null: false
-    t.string "species_name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "species_id"
@@ -147,7 +160,7 @@ ActiveRecord::Schema.define(version: 2019_03_02_143039) do
     t.string "move2"
     t.string "move3"
     t.string "move4"
-    t.string "held_item"
+    t.integer "held_item_id"
     t.integer "combat_rule"
     t.string "ball"
     t.boolean "is_colored"
@@ -191,6 +204,8 @@ ActiveRecord::Schema.define(version: 2019_03_02_143039) do
   add_foreign_key "base_status_types", "base_statuses"
   add_foreign_key "base_status_types", "types"
   add_foreign_key "base_statuses", "species"
+  add_foreign_key "item_name_groups", "item_groups"
+  add_foreign_key "item_name_groups", "items"
   add_foreign_key "monsters", "species_groups"
   add_foreign_key "species_groups", "users"
   add_foreign_key "untrained_monsters", "species_groups"

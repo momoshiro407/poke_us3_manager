@@ -32,8 +32,8 @@
     <%= f.collection_select :characteristic_id, Characteristic.all, :id, :name, {class: 'form-control', include_blank: '選択してください'} %>
   </div>
   <div class="form-group">
-    <%= f.label :held_item %>
-    <%= f.text_field :held_item, class: 'form-control' %>
+    <%= f.label :held_item_id %>
+    <%= f.grouped_collection_select :held_item_id, @item_groups, :items, :name, :id, :name %>
   </div>
   <div class="form-group">
     <%= f.label :combat_rule %>

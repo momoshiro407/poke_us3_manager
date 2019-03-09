@@ -37,7 +37,7 @@
       <td><%= Nature.find_by(id: @monster.nature_id).try(:name) %></td>
       <td><%= Characteristic.find_by(id: @monster.characteristic_id).try(:name) %></td>
       <td><%= Ability.find_by(id: @monster.ability_id).try(:ability_name) %></td>
-      <td><%= @monster.held_item %></td>
+      <td><%= Item.find_by(id: @monster.held_item_id).try(:name) %></td>
       <td><%= get_enum_key_by_number(:combat_rule, @monster.combat_rule) %></td>
     </tr>
   </table>
