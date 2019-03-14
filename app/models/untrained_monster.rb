@@ -1,4 +1,6 @@
 class UntrainedMonster < ApplicationRecord
+  include ActiveModel::Validations
+
   belongs_to :species_group
   has_one :species, through: :species_group
 
@@ -9,4 +11,9 @@ class UntrainedMonster < ApplicationRecord
   scope :search_nature, -> (nature) { where(nature_id: nature) }
   scope :search_move, -> (move) { where("move1 = ? OR move2 = ? OR move3 = ? OR move4 = ?", move, move, move, move) }
   # TODO: monsterの検索処理と丸かぶりなので後で1つにまとめる
+  validates :hp_effort, :attack_effort , :defense_effort,
+            :sp_attack_effort, :sp_defense_effort, :speed_effort,
+            numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 255 }, allow_blank: true
+  validates_with TotalEffortValuesValidator
+
 end

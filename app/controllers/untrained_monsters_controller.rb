@@ -14,11 +14,17 @@ class UntrainedMonstersController < ApplicationController
   end
 
   def create
+    # TODO: @species, @abilities, @item_groupsを再取得しないとnew再描画でエラーになるが、煩雑なので要リファクタリング
     species_group = SpeciesGroup.find(params[:species_group_id])
     create_params = untrained_monster_params
     create_params['base_status_id'] ||= BaseStatus.find_by(species_id: species_group.species.id).id
     @untrained_monster = species_group.untrained_monsters.build(create_params)
     @untrained_monster.nickname = species_group.species.name if @untrained_monster.nickname.blank?
+    @species = species_group.species
+    base_status = BaseStatus.find_by(species_id: @species.id)
+    base_status_abilities = BaseStatusAbility.where(base_status_id: base_status.id)
+    @abilities = get_abilities(base_status_abilities)
+    @item_groups = ItemGroup.all
     if @untrained_monster.save
       log_in @untrained_monster.species_group.user
       flash[:success] = '育成予定ポケモンを作成しました'
@@ -38,7 +44,12 @@ class UntrainedMonstersController < ApplicationController
   end
 
   def update
+    # TODO: @species, @abilities, @item_groupsを再取得しないとedit再描画でエラーになるが、煩雑なので要リファクタリング
     @untrained_monster = UntrainedMonster.find(params[:id])
+    @species = Species.find_by(number: @untrained_monster.species)
+    base_status_abilities = BaseStatusAbility.where(base_status_id: @untrained_monster.base_status_id)
+    @abilities = get_abilities(base_status_abilities)
+    @item_groups = ItemGroup.all
     update_params = untrained_monster_params
     update_params['base_status_id'] ||= @untrained_monster.base_status_id
     if @untrained_monster.update_attributes(update_params)
@@ -54,7 +65,7 @@ class UntrainedMonstersController < ApplicationController
     @untrained_monster = UntrainedMonster.find(params[:id])
     @base_status = BaseStatus.find(@untrained_monster.base_status_id)
     @base_status_mega = BaseStatus.where(species_id: @base_status.species_id, form_kind: 1)
-    @types =  @base_status.types.map {|type| type}
+    @types = @base_status.types.map {|type| type}
   end
 
   def destroy
@@ -77,12 +88,12 @@ class UntrainedMonstersController < ApplicationController
 
   def untrained_monster_params
     params.require(:untrained_monster).permit(:nickname, :gender, :level, :ability_id, :nature_id, :characteristic_id,
-                                    :type1, :type2, :move1, :move2, :move3, :move4, :held_item_id, :combat_rule,
-                                    :is_colored, :hp_statistics, :attack_statistics, :defense_statistics,
-                                    :sp_attack_statistics, :sp_defense_statistics, :speed_statistics,
-                                    :hp_individual, :attack_individual, :defense_individual, :sp_attack_individual,
-                                    :sp_defense_individual, :speed_individual, :hp_effort, :attack_effort,
-                                    :defense_effort, :sp_attack_effort, :sp_defense_effort, :speed_effort, :memo, :base_status_id
+                                              :type1, :type2, :move1, :move2, :move3, :move4, :held_item_id, :combat_rule,
+                                              :is_colored, :hp_statistics, :attack_statistics, :defense_statistics,
+                                              :sp_attack_statistics, :sp_defense_statistics, :speed_statistics,
+                                              :hp_individual, :attack_individual, :defense_individual, :sp_attack_individual,
+                                              :sp_defense_individual, :speed_individual, :hp_effort, :attack_effort,
+                                              :defense_effort, :sp_attack_effort, :sp_defense_effort, :speed_effort, :memo, :base_status_id
     )
   end
 
