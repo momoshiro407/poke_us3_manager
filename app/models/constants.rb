@@ -1,0 +1,4 @@
+module Constants
+  TOTAL_EFFORT_LIMIT = 510
+  ONE_EFFORT_LIMIT = 255
+end

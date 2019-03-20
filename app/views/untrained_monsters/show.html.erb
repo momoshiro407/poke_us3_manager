@@ -78,50 +78,92 @@
   </table>
 </div>
 <br>
-<div class="status-info">
-  ステータス
-  <table border="2">
-    <tr>
-      <th></th>
-      <th>HP</th>
-      <th>こうげき</th>
-      <th>ぼうぎょ</th>
-      <th>とくこう</th>
-      <th>とくぼう</th>
-      <th>すばやさ</th>
-    </tr>
-    <tr>
-      <td>個体値</td>
-      <td><%= @untrained_monster.hp_individual %></td>
-      <td><%= @untrained_monster.attack_individual %></td>
-      <td><%= @untrained_monster.defense_individual %></td>
-      <td><%= @untrained_monster.sp_attack_individual %></td>
-      <td><%= @untrained_monster.sp_defense_individual %></td>
-      <td><%= @untrained_monster.speed_individual %></td>
-    </tr>
-    <tr>
-      <td>努力値</td>
-      <td><%= @untrained_monster.hp_effort %></td>
-      <td><%= @untrained_monster.attack_effort %></td>
-      <td><%= @untrained_monster.defense_effort %></td>
-      <td><%= @untrained_monster.sp_attack_effort %></td>
-      <td><%= @untrained_monster.sp_defense_effort %></td>
-      <td><%= @untrained_monster.speed_effort %></td>
-    </tr>
-    <tr>
-      <td>ステータス実数値</td>
-      <td><%= @untrained_monster.hp_statistics %></td>
-      <td><%= @untrained_monster.attack_statistics %></td>
-      <td><%= @untrained_monster.defense_statistics %></td>
-      <td><%= @untrained_monster.sp_attack_statistics %></td>
-      <td><%= @untrained_monster.sp_defense_statistics %></td>
-      <td><%= @untrained_monster.speed_statistics %></td>
-    </tr>
-    <% if @untrained_monster.species.is_mega_evolution %>
-      <% @base_status_mega.each do |base_status_mega| %>
-        <!--        # TODO: 登録時に持ち物をメガストーンにした場合のみ追加でステータスを表示する-->
+<div class="status-area">
+  <div class="status-info">
+    ステータス
+    <table border="2" class="status-info">
+      <tr>
+        <th style="width: 120px;"></th>
+        <th style="width: 65px;">HP</th>
+        <th style="width: 65px;">こうげき</th>
+        <th style="width: 65px;">ぼうぎょ</th>
+        <th style="width: 65px;">とくこう</th>
+        <th style="width: 65px;">とくぼう</th>
+        <th style="width: 65px;">すばやさ</th>
+      </tr>
+      <tr>
+        <td>個体値</td>
+        <td><%= @untrained_monster.hp_individual %></td>
+        <td><%= @untrained_monster.attack_individual %></td>
+        <td><%= @untrained_monster.defense_individual %></td>
+        <td><%= @untrained_monster.sp_attack_individual %></td>
+        <td><%= @untrained_monster.sp_defense_individual %></td>
+        <td><%= @untrained_monster.speed_individual %></td>
+      </tr>
+      <tr class="effort-value">
+        <td data-toggle="collapse" data-target=".effort-memo"><span id="collapse-mark">▶</span> 努力値︎</td>
+        <td id="effort-target-1"><%= @untrained_monster.hp_effort %></td>
+        <td id="effort-target-2"><%= @untrained_monster.attack_effort %></td>
+        <td id="effort-target-3"><%= @untrained_monster.defense_effort %></td>
+        <td id="effort-target-4"><%= @untrained_monster.sp_attack_effort %></td>
+        <td id="effort-target-5"><%= @untrained_monster.sp_defense_effort %></td>
+        <td id="effort-target-6"><%= @untrained_monster.speed_effort %></td>
+      </tr>
+      <tr class="effort-memo collapse">
+        <td>努力値メモ</td>
+        <td id="effort-memo-1"></td>
+        <td id="effort-memo-2"></td>
+        <td id="effort-memo-3"></td>
+        <td id="effort-memo-4"></td>
+        <td id="effort-memo-5"></td>
+        <td id="effort-memo-6"></td>
+      </tr>
+      <tr class="effort-memo counter collapse">
+        <td>
+          <button>保存</button>
+        </td>
+        <td colspan="6" class="effort-value-counter">
+          <ul class="counter upper">
+            <li value="1">+1</li>
+            <li value="10">+10</li>
+            <li value="100">+100</li>
+            <li value="255">ALL</li>
+          </ul>
+          <ul class="counter downer">
+            <li value="-1">-1</li>
+            <li value="-10">-10</li>
+            <li value="-100">-100</li>
+            <li value="-255">RESET</li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <td>実数値</td>
+        <td><%= @untrained_monster.hp_statistics %></td>
+        <td><%= @untrained_monster.attack_statistics %></td>
+        <td><%= @untrained_monster.defense_statistics %></td>
+        <td><%= @untrained_monster.sp_attack_statistics %></td>
+        <td><%= @untrained_monster.sp_defense_statistics %></td>
+        <td><%= @untrained_monster.speed_statistics %></td>
+      </tr>
+      <% if @untrained_monster.species.is_mega_evolution %>
+        <% @base_status_mega.each do |base_status_mega| %>
+          <!--        # TODO: 登録時に持ち物をメガストーンにした場合のみ追加でステータスを表示する-->
+          <tr>
+            <td>ステータス実数値（メガシンカ）</td>
+            <td><%= @untrained_monster.hp_statistics %></td>
+            <td><%= @untrained_monster.attack_statistics %></td>
+            <td><%= @untrained_monster.defense_statistics %></td>
+            <td><%= @untrained_monster.sp_attack_statistics %></td>
+            <td><%= @untrained_monster.sp_defense_statistics %></td>
+            <td><%= @untrained_monster.speed_statistics %></td>
+          </tr>
+        <% end %>
+      <% end %>
+      <% if @untrained_monster.species.is_form_change %>
         <tr>
-          <td>ステータス実数値（メガシンカ）</td>
+          <!--        # TODO: 戦闘中にフォルムが変化する種族のみ追加でステータスを表示する（戦闘前からフォルムチェンジしている場合を除く）-->
+          <td>ステータス実数値（戦闘中フォルムチェンジ）</td>
           <td><%= @untrained_monster.hp_statistics %></td>
           <td><%= @untrained_monster.attack_statistics %></td>
           <td><%= @untrained_monster.defense_statistics %></td>
@@ -130,22 +172,9 @@
           <td><%= @untrained_monster.speed_statistics %></td>
         </tr>
       <% end %>
-    <% end %>
-    <% if @untrained_monster.species.is_form_change %>
-      <tr>
-        <!--        # TODO: 戦闘中にフォルムが変化する種族のみ追加でステータスを表示する（戦闘前からフォルムチェンジしている場合を除く）-->
-        <td>ステータス実数値（戦闘中フォルムチェンジ）</td>
-        <td><%= @untrained_monster.hp_statistics %></td>
-        <td><%= @untrained_monster.attack_statistics %></td>
-        <td><%= @untrained_monster.defense_statistics %></td>
-        <td><%= @untrained_monster.sp_attack_statistics %></td>
-        <td><%= @untrained_monster.sp_defense_statistics %></td>
-        <td><%= @untrained_monster.speed_statistics %></td>
-      </tr>
-    <% end %>
-  </table>
+    </table>
+  </div>
 </div>
-<br>
 <div class="memo-info">
   <table border="2">
     <tr>
@@ -156,6 +185,38 @@
     </tr>
   </table>
 </div>
+
+<script>
+    $(function () {
+        // クリックしたセルを選択状態にする処理
+        let effort_memo_cells = $('td[id^="effort-memo-"]');
+        effort_memo_cells.click(function () {
+            effort_memo_cells.each(function (index, cell) {
+                $(cell).removeClass('active');
+            });
+            $(this).addClass('active');
+        });
+
+        // カウンタークリックで選択状態のセルの値を変化させる処理
+        let effort_cells = $('td[id^="effort-target-"]');
+        let counter_btns = $('ul.counter li');
+        counter_btns.click(function () {
+            let active_cel = $('td[id^="effort-memo-"].active');
+            if ($(active_cel).length === 0) { return; }
+            let target_ev = Number($(effort_cells[active_cel[0].cellIndex - 1]).text());
+            if (target_ev === 0 || target_ev === '') { return; }
+            let ev = Number(active_cel.text()) + Number($(this).val());
+            if (ev > target_ev) { ev = target_ev; }
+            if (ev < 0) { ev = 0; }
+            if (ev === target_ev) {
+                $(active_cel).addClass('full-count');
+            } else {
+                $(active_cel).removeClass('full-count');
+            }
+            active_cel.text(ev);
+        });
+    });
+</script>
 
 
 

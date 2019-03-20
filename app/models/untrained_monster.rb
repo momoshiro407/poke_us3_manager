@@ -13,7 +13,7 @@ class UntrainedMonster < ApplicationRecord
   # TODO: monsterの検索処理と丸かぶりなので後で1つにまとめる
   validates :hp_effort, :attack_effort , :defense_effort,
             :sp_attack_effort, :sp_defense_effort, :speed_effort,
-            numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 255 }, allow_blank: true
+            numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: Constants::ONE_EFFORT_LIMIT }, allow_blank: true
   validates_with TotalEffortValuesValidator
 
 end
