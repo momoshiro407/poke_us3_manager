@@ -1,0 +1,2 @@
+class EffortValueMemo < ApplicationRecord
+end

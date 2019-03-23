@@ -3,6 +3,7 @@ class UntrainedMonster < ApplicationRecord
 
   belongs_to :species_group
   has_one :species, through: :species_group
+  has_one :effort_value_memo
 
   scope :with_species_group, -> (species_group_id) { joins(:species_group).merge(SpeciesGroup.where(id: species_group_id)) }
   scope :search_nickname, -> (nickname) { where("nickname like ?", "%#{nickname}%") }

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_09_131903) do
+ActiveRecord::Schema.define(version: 2019_03_21_033226) do
 
   create_table "abilities", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "ability_name", null: false
@@ -58,6 +58,19 @@ ActiveRecord::Schema.define(version: 2019_03_09_131903) do
     t.integer "combat_rule", limit: 1, default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "effort_value_memos", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "untrained_monster_id"
+    t.integer "hp_effort_value"
+    t.integer "attack_effort_value"
+    t.integer "defense_effort_value"
+    t.integer "sp_attack_effort_value"
+    t.integer "sp_defense_effort_value"
+    t.integer "speed_effort_value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["untrained_monster_id"], name: "index_effort_value_memos_on_untrained_monster_id"
   end
 
   create_table "item_groups", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -204,6 +217,7 @@ ActiveRecord::Schema.define(version: 2019_03_09_131903) do
   add_foreign_key "base_status_types", "base_statuses"
   add_foreign_key "base_status_types", "types"
   add_foreign_key "base_statuses", "species"
+  add_foreign_key "effort_value_memos", "untrained_monsters"
   add_foreign_key "item_name_groups", "item_groups"
   add_foreign_key "item_name_groups", "items"
   add_foreign_key "monsters", "species_groups"

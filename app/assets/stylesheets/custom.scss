@@ -409,7 +409,7 @@ p[class^="type-area"] {
 
 .status-info th, td {
   text-align: center;
-  padding: 0px 3px;
+  padding: 2px 3px;
 }
 
 .memo-info th, td {
@@ -431,9 +431,34 @@ tr.effort-memo.counter.collapse.in {
   height: 75px;
 }
 
-span#collapse-mark {
+#effort-tab {
   &:hover {
     cursor: pointer;
+  }
+}
+
+span#collapse-mark {
+  color: #999999;
+  display: inline-block;
+  font-size: 11px;
+}
+
+span#collapse-mark.rotate {
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  -o-transform: rotate(90deg);
+  transform: rotate(90deg);
+  -webkit-transition-duration: 0.2s;
+  -moz-transition-duration: 0.2s;
+  -ms-transition-duration: 0.2s;
+  -o-transition-duration: 0.2s;
+  transition-duration: 0.2s;
+}
+
+#store-btn {
+  &:disabled {
+    opacity: 0.5;
   }
 }
 
@@ -448,6 +473,7 @@ td[id^='effort-memo-'].full-count {
 
 td.effort-value-counter {
   height: 40px;
+  padding: 4px 3px 5px 3px;
   ul {
     list-style: none;
     padding: 0;

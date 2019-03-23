@@ -101,7 +101,7 @@
         <td><%= @untrained_monster.speed_individual %></td>
       </tr>
       <tr class="effort-value">
-        <td data-toggle="collapse" data-target=".effort-memo"><span id="collapse-mark">▶</span> 努力値︎</td>
+        <td data-toggle="collapse" data-target=".effort-memo" id="effort-tab"><span id="collapse-mark">▶</span> 努力値︎</td>
         <td id="effort-target-1"><%= @untrained_monster.hp_effort %></td>
         <td id="effort-target-2"><%= @untrained_monster.attack_effort %></td>
         <td id="effort-target-3"><%= @untrained_monster.defense_effort %></td>
@@ -111,16 +111,16 @@
       </tr>
       <tr class="effort-memo collapse">
         <td>努力値メモ</td>
-        <td id="effort-memo-1"></td>
-        <td id="effort-memo-2"></td>
-        <td id="effort-memo-3"></td>
-        <td id="effort-memo-4"></td>
-        <td id="effort-memo-5"></td>
-        <td id="effort-memo-6"></td>
+        <td id="effort-memo-1"><%= @effort_value_memo.try(:hp_effort_value) %></td>
+        <td id="effort-memo-2"><%= @effort_value_memo.try(:attack_effort_value) %></td>
+        <td id="effort-memo-3"><%= @effort_value_memo.try(:defense_effort_value) %></td>
+        <td id="effort-memo-4"><%= @effort_value_memo.try(:sp_attack_effort_value) %></td>
+        <td id="effort-memo-5"><%= @effort_value_memo.try(:sp_defense_effort_value) %></td>
+        <td id="effort-memo-6"><%= @effort_value_memo.try(:speed_effort_value) %></td>
       </tr>
       <tr class="effort-memo counter collapse">
         <td>
-          <button>保存</button>
+          <button id="store-btn" disabled="disabled" >保存</button>
         </td>
         <td colspan="6" class="effort-value-counter">
           <ul class="counter upper">
@@ -186,11 +186,27 @@
   </table>
 </div>
 
+<!--jQueryにuntrained_monster_idを引き渡すための非表示inputエリア-->
+<input id="untrained_monster_id" type="hidden" value="<%= @untrained_monster.id %>">
+
 <script>
     $(function () {
-        // クリックしたセルを選択状態にする処理
+        // 初期表示時に努力値振りを完了しているかどうかチェック
+        let effort_cells = $('td[id^="effort-target-"]');
         let effort_memo_cells = $('td[id^="effort-memo-"]');
-        effort_memo_cells.click(function () {
+        effort_memo_cells.each(function(index, cell) {
+            if ($(cell).text() === $(effort_cells[index]).text()) {
+                $(this).addClass('full-count');
+            }
+        });
+
+        // 努力値欄の▶︎クリック時のアニメーション設定
+        $('#effort-tab').click(function() {
+            $('#collapse-mark').toggleClass('rotate');
+        });
+
+        // クリックしたセルを選択状態にする処理
+        effort_memo_cells.click(function() {
             effort_memo_cells.each(function (index, cell) {
                 $(cell).removeClass('active');
             });
@@ -198,22 +214,51 @@
         });
 
         // カウンタークリックで選択状態のセルの値を変化させる処理
-        let effort_cells = $('td[id^="effort-target-"]');
         let counter_btns = $('ul.counter li');
-        counter_btns.click(function () {
+        counter_btns.click(function() {
             let active_cel = $('td[id^="effort-memo-"].active');
-            if ($(active_cel).length === 0) { return; }
+            if ($(active_cel).length === 0) {
+                return;
+            }
             let target_ev = Number($(effort_cells[active_cel[0].cellIndex - 1]).text());
-            if (target_ev === 0 || target_ev === '') { return; }
+            if (target_ev === 0 || target_ev === '') {
+                return;
+            }
             let ev = Number(active_cel.text()) + Number($(this).val());
-            if (ev > target_ev) { ev = target_ev; }
-            if (ev < 0) { ev = 0; }
+            if (ev > target_ev) {
+                ev = target_ev;
+            }
+            if (ev < 0) {
+                ev = 0;
+            }
             if (ev === target_ev) {
                 $(active_cel).addClass('full-count');
             } else {
                 $(active_cel).removeClass('full-count');
             }
             active_cel.text(ev);
+            $('#store-btn').prop('disabled', false);
+        });
+
+        // 努力値メモをeffort_value_memosモデルに保存
+        let store_btn = $('#store-btn');
+        store_btn.click(function() {
+            let effort_memo_values = [];
+            effort_memo_cells.each(function(index, cell) {
+                effort_memo_values.push($(cell).text());
+            });
+            $.get({
+                url: '/store_effort_value_memos',
+                data: {
+                    effort_value_memo: {
+                        hp_effort_value: effort_memo_values[0], attack_effort_value: effort_memo_values[1],
+                        defense_effort_value: effort_memo_values[2], sp_attack_effort_value: effort_memo_values[3],
+                        sp_defense_effort_value: effort_memo_values[4], speed_effort_value: effort_memo_values[5],
+                        untrained_monster_id: $('#untrained_monster_id').val()
+                    }
+                }
+            });
+            $(this).prop('disabled', true);
         });
     });
 </script>
