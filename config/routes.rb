@@ -20,4 +20,5 @@ Rails.application.routes.draw do
   get 'change_abilities_select_untrained', to: 'untrained_monsters#change_abilities_select_untrained'
   get 'set_calculated_status', to: 'monsters#set_calculated_status'
   get 'set_calculated_status_untrained', to: 'untrained_monsters#set_calculated_status_untrained'
+  get 'store_effort_value_memos', to: 'untrained_monsters#store_effort_value_memos'
 end

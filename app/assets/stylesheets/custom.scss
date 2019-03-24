@@ -190,6 +190,7 @@ select {
 .fa {
   padding-left: 5px;
 }
+
 .fa-green {
   color: #00BB00;
 }
@@ -310,70 +311,87 @@ p[class^="type-area"] {
   // ノーマル
   background-color: #B8B795;
 }
+
 .species-info .type-area-2 {
   // ほのお
   background-color: #DC5949;
 }
+
 .species-info .type-area-3 {
   // みず
   background-color: #73B8E9;
 }
+
 .species-info .type-area-4 {
   // でんき
   background-color: #F2D479;
 }
+
 .species-info .type-area-5 {
   // くさ
   background-color: #95C779;
 }
+
 .species-info .type-area-6 {
   // こおり
   background-color: #B8E7E7;
 }
+
 .species-info .type-area-7 {
   // かくとう
   background-color: #87352F;
 }
+
 .species-info .type-area-8 {
   // どく
   background-color: #9B5FA7;
 }
+
 .species-info .type-area-9 {
   // じめん
   background-color: #E3CB8F;
 }
+
 .species-info .type-area-10 {
   // ひこう
   background-color: #B2BCEA;
 }
+
 .species-info .type-area-11 {
   // エスパー
   background-color: #E46B9B;
 }
+
 .species-info .type-area-12 {
   // むし
   background-color: #BDB85F;
 }
+
 .species-info .type-area-13 {
   // いわ
   background-color: #C2A75F;
 }
+
 .species-info .type-area-14 {
   // ゴースト
   background-color: #6C6CA1;
 }
+
 .species-info .type-area-15 {
   // ドラゴン
   background-color: #6687E3;
 }
+
 .species-info .type-area-16 {
   // あく
   background-color: #6C594F;
 }
+
 .species-info .type-area-17 {
   // はがね
   background-color: #C7D4E0;
 }
+
 .species-info .type-area-18 {
   // フェアリー
   background-color: #FA90BA;
@@ -388,12 +406,113 @@ p[class^="type-area"] {
   text-align: center;
   padding: 2px 3px;
 }
+
 .status-info th, td {
   text-align: center;
   padding: 2px 3px;
 }
+
 .memo-info th, td {
   text-align: center;
   padding: 2px 3px;
 }
 
+/* monster search status info */
+
+table.status-info {
+  width: 510px;
+}
+
+tr.effort-memo {
+  background-color: #eaeaea;
+}
+
+tr.effort-memo.counter.collapse.in {
+  height: 75px;
+}
+
+#effort-tab {
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+span#collapse-mark {
+  color: #999999;
+  display: inline-block;
+  font-size: 11px;
+}
+
+span#collapse-mark.rotate {
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  -o-transform: rotate(90deg);
+  transform: rotate(90deg);
+  -webkit-transition-duration: 0.2s;
+  -moz-transition-duration: 0.2s;
+  -ms-transition-duration: 0.2s;
+  -o-transition-duration: 0.2s;
+  transition-duration: 0.2s;
+}
+
+#store-btn {
+  &:disabled {
+    opacity: 0.5;
+  }
+}
+
+td[id^='effort-memo-'].active {
+  background-color: #ffcccc;
+}
+
+td[id^='effort-memo-'].full-count {
+  color: #DC5949;
+  font-weight: bold;
+}
+
+td.effort-value-counter {
+  height: 40px;
+  padding: 4px 3px 5px 3px;
+  ul {
+    list-style: none;
+    padding: 0;
+    li {
+      background-color: #73B8E9;
+      float: left;
+      width: 23%;
+      margin-left: 6px;
+      height: 30px;
+      line-height: 30px;
+      color: #ffffff;
+      font-size: 17px;
+      font-weight: bold;
+      border: none;
+      border-radius: 2px;
+      box-shadow: 0 2px #6C6CA1;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      &:hover {
+        cursor: pointer;
+      }
+      &:active {
+        background-color: #6687E3;
+        color: gold;
+        box-shadow: none;
+        margin-top: 1px;
+      }
+    }
+  }
+}
+
+ul.upper {
+  height: 30px;
+  margin-bottom: 5px;
+}
+
+.memo-info {
+  margin-top: 30px;
+  clear: both;
+}

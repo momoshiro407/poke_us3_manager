@@ -14,10 +14,16 @@ class MonstersController < ApplicationController
   end
 
   def create
+    # TODO: @species, @abilities, @item_groupsを再取得しないとnew再描画でエラーになるが、煩雑なので要リファクタリング
     species_group = SpeciesGroup.find(params[:species_group_id])
     create_params = monster_params
     create_params['base_status_id'] ||= BaseStatus.find_by(species_id: species_group.species.id).id
     @monster = species_group.monsters.build(create_params)
+    @species = species_group.species
+    base_status = BaseStatus.find_by(species_id: @species.id)
+    base_status_abilities = BaseStatusAbility.where(base_status_id: base_status.id)
+    @abilities = get_abilities(base_status_abilities)
+    @item_groups = ItemGroup.all
     if @monster.save
       log_in @monster.species_group.user
       flash[:success] = '育成済みポケモンを作成しました'
@@ -37,7 +43,12 @@ class MonstersController < ApplicationController
   end
 
   def update
+    # TODO: @species, @abilities, @item_groupsを再取得しないとedit再描画でエラーになるが、煩雑なので要リファクタリング
     @monster = Monster.find(params[:id])
+    @species = Species.find_by(number: @monster.species)
+    base_status_abilities = BaseStatusAbility.where(base_status_id: @monster.base_status_id)
+    @abilities = get_abilities(base_status_abilities)
+    @item_groups = ItemGroup.all
     if @monster.update_attributes(monster_params)
       flash[:success] = '育成データを更新しました'
       redirect_to species_group_monster_path(@monster.species_group.id)
